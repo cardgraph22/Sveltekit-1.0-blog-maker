@@ -1,0 +1,68 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  width: 300px;
+  height: 40px;
+}
+
+.btn {
+  background-color: steelblue;
+  color: lightblue;
+  padding: 0px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid steelblue;
+  width: 7rem;
+  height: 2rem;
+}
+
+.btn:hover {
+  background-color: lightblue;
+  color: blue;
+}
+.btn:disabled {
+  color: black;
+}
+
+img {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.text-area, input {
+  background-color: #d9d9d9;
+  padding: .5em;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  outline: none;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.4;
+  width: 300px;
+  height: 50px;
+  transition: all 0.2s;
+}
+.text-area:hover, input:hover {
+  cursor: pointer;
+  background-color: white;
+}
+.text-area:focus, input:focus {
+  cursor: text;
+  color: #333333;
+  background-color: white;
+  border-color: #333333;
+}
