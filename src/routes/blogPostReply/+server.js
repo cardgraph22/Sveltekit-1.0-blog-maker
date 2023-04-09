@@ -1,4 +1,4 @@
-import { Blog } from "../../hooks.server";
+import { Blog } from "/src/hooks.server";
 export const PUT = async({request})=>{
   const body = await request.json()
   let resp = await Blog.findByIdAndUpdate(

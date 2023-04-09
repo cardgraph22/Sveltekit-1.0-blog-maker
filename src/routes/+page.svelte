@@ -1,21 +1,56 @@
 <!--
   main page
 -->
-
-<h4>Welcome to </h4>
-<pre>
-<p>This project is intended for Sveltekit 1.0 developers.</p>
-<p>Its purpose is to demonstrate recursive nested blog replies using svelte:self</p>
-<p>The documentation is in the README.MD file on github.</p>
-<p>As an added bonus, it uses MongoDB with Mongoose (if you're interested).</p>
-<p>As a double added bonus, it show how to upload images (/userForm)</p>
-<p>So click 'List Blogs', then click the conversation icon under the user to reveal comments/replies.</p>
-<p>Then play around with the code and have fun!</p>
-<p>NB - This is still a work in progress: better css, authentication, et al</p>
-</pre>
-
+<div class="wrapper">
+  <h2>Welcome to Blog-Maker</h2>
+  <p>This project is intended for Sveltekit 1.0 developers.</p>
+  <p>Its demonstrates recursive nested blog replies using the element:</p>
+  <p class='coded'>&lt;svelte:self&gt;</p>
+  <p>The documentation is in the README.MD file on github.
+  As an added bonus, it uses MongoDB with Mongoose (if you're interested).
+  As a double added bonus, it show how to upload images (/userForm)
+  So click 'List Blogs', then click the conversation icon under the user to
+   reveal comments/replies.</p>
+  <figure class="fig-container">
+    <img src="/src/uploads/monoline.png" alt="noImg">
+    <figcaption>Hi, I'm Monoline</figcaption>
+  </figure>
+  <p>Then play around with the code and have fun!</p>
+  <p>NB - This is still a work in progress: better css, authentication, et al</p>
+</div>
 <style>
-  h4 {
-    padding-top: 20px;
+  .wrapper {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 30px;
   }
+  h2 {
+    font-size: 1.85em;
+    line-height: 1.33;
+    margin: .8em 0;
+  }
+  p {
+    font-size: 1.385em;
+    line-height: 1.8;
+  }
+  p.coded {
+    text-align: center;
+    color:blue;
+  }
+  figure {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+  }
+  figcaption {
+    color: gray;
+    font-style: italic;
+  }
+
 </style>
+
+<!--
+
+  CSS properties such as height , width , border , margin , padding , etc. are not inherited.
+
+-->
