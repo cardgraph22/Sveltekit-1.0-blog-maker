@@ -45,7 +45,7 @@ img {
 }
 
 .text-area, input {
-  background-color: #d9d9d9;
+  background-color: #f2f2f2;
   padding: .5em;
   border-radius: 10px;
   border: 2px solid transparent;
@@ -65,5 +65,5 @@ img {
   cursor: text;
   color: #333333;
   background-color: white;
-  border-color: #333333;
+  border-color: gray;
 }

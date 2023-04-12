@@ -2,8 +2,9 @@
   //
   //  layout.svelte
   //
-  import { browser } from '$app/environment'
-  import { onMount, onDestroy } from 'svelte';
+  //import { browser } from '$app/environment'
+  import { onMount } from 'svelte';
+  import { fade } from 'svelte/transition';
   import responsiveStore from '../stores/ResponsiveStore';
 
   import '../app.css'
@@ -20,7 +21,9 @@
   onMount(()=>{
     const mediaQuery = window.matchMedia("(min-width: 768px)");
     if (window.matchMedia("(min-width: 768px)").matches) {
+      //  the width is > 786
       console.log('window match')
+      $responsiveStore = { type:'desktop', burgerOn:false, menuFlexDirection:'row' };
     }
     const setResponsive = e => {
       console.log('mediaQuery, window.innerWidth', window.innerWidth);
@@ -44,14 +47,14 @@
 </script>
 
 <nav class='navbar'>
-  <div class="nav-lhs">
-    <div class="logo">
-      <a href="/"><img src="/cg22Logo.png" alt="Cg22"></a>
-    </div>
+  <div class="logo">
+    <a href="/" on:click={(()=>toggleBurger())}><img src="/cg22Logo.png" alt="Cg22"></a>
   </div>
-  <div class="nav-rhs">
     {#if !$responsiveStore.burgerOn}  <!-- burger off -->
-      <div class="menuText" style="display:flex; flex-direction:{$responsiveStore.menuFlexDirection}">
+      <div class="menuText nav-rhs"
+            style="display:flex;
+            flex-direction:{$responsiveStore.menuFlexDirection}"
+            transition:fade>
         <a href="/blogList"    on:click={(()=>toggleBurger())}>List Blogs</a>
         <a href="/blogForm"    on:click={(()=>toggleBurger())}>Add Blog</a>
         <a href="/userForm"    on:click={(()=>toggleBurger())}>Add User</a>
@@ -66,7 +69,7 @@
         <span class="bar"></span>
       </button>
     {/if}
-  </div>
+
 </nav>
 <div class='loginmsg'>Logged In: { msg }</div>
 <style>
@@ -74,31 +77,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
-    padding: 10px;
     background-color: lightblue;
+    padding: 10px;
   }
   .navbar a {
     text-decoration: none;
-    color: #606060;
+    color: #404040;
+    /*padding-right: 10px;*/
   }
   .navbar a:hover {
     color: black;
   }
   .nav-rhs {
-    display: flex;
-    gap: 15px;
+    gap: 10px;
   }
   .logo {
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
     cursor: pointer;
     background-color: white;
   }
   img {
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
     transform: scale(.7);
     border-radius: 0;
   }
@@ -106,15 +108,19 @@
     color: gray;
   }
   .burger {
+
     display: flex;
     cursor: pointer;
+        /*
     position: absolute;
     top: .75rem;
     right: 1rem;
+        */
     flex-direction: column;
     justify-content: space-between;
     width: 30px;
     height: 21px;
+
   }
   .burger .bar {
     height: 3px;
@@ -127,11 +133,16 @@
     cursor: pointer;
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (max-width: 767px) {
     .menuText {
       position: absolute;
-      top: 0;
-      right: 0;
+      top: 55px;
+      right: 10px;
+      padding: 10px;
+      background-color: white;
+      border: 1px solid lightgray;
+      border-radius: 10px;
+      z-index: 1;
     }
   }
 /*
@@ -150,7 +161,7 @@ mobile  (match all devices of that width and narrower)
 <slot></slot>
 
 <!--
-// Remove media query listener on destroy
+// Remove media query listener on destroy (user SSR)
 //onDestroy(() => {
 //  console.log('layout, mediaQuery 3', mediaQuery)
 //  if(browser){

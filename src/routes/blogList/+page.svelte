@@ -87,8 +87,8 @@
         <button class='speech' disabled={!blog.replies.length} on:click={()=>(showBlogReplies(idx))}>🗨️ {blog.replies.length}</button>
       </div>
       <div class="blog-entry">
-        <h4>Title: {blog.title}</h4>
-        <p>{blog.entry}</p>
+        <h4>{blog.title}</h4>
+        <p class='entry'>{blog.entry}</p>
         <textarea class='text-area' bind:value={entry[idx]} placeholder={txtMsg}></textarea>
         <div class="btns">
           <button class='btn' on:click={()=>postReply(blog, entry[idx])}>Post</button>
@@ -129,7 +129,7 @@
     display: flex;
     align-items: center;
     width: 800px;
-    background-color: #f2f2f2;  /* very light gray */
+    background-color: snow;
     margin: 5px auto;
     border-radius: 15px;
     padding: 5px;
@@ -148,7 +148,10 @@
     width: 400px;
     border: 1px solid lightgray;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
+  }
+  .entry {
+    color: #303030
   }
   textarea {
     height: 2rem;
