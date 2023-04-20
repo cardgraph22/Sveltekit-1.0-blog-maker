@@ -22,7 +22,7 @@
 
 </script>
 
-<h3>Blog</h3>
+<h3>Add Blog Entry</h3>
 <!--{#if user == ''}<p class="admon">Please log in to add blog</p>{/if}-->
 
 <form method="POST" use:enhance>

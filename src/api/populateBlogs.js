@@ -4,8 +4,8 @@ export function populateBlogs() {
   let blogs = [
     {
       username: 'adam',
-      title: 'blog1 title',
-      entry: 'entry1',
+      title: 'How to make a blog entry',
+      entry: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi voluptas, fugiat, harum laudantium odit suscipit quaerat aspernatur deleniti adipisci tenetur voluptate molestias porro exercitationem! Enim necessitatibus rem doloremque aperiam ipsam?',
   
       replies: [
         {

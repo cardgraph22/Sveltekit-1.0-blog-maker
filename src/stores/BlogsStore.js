@@ -2,10 +2,13 @@ import { writable } from "svelte/store";
 const blogsStore = writable();
 //const blogsStore = writable(
 //  {
-//    user        : '',
 //    _id         : '',
+//    username    : '',
 //    entry       : '',
 //    replies     : [],
+
+
+//  not added
 //    blogLevel   : 0,
 //    repliesLevel: 0
 //  });

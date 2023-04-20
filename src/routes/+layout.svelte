@@ -6,6 +6,7 @@
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import responsiveStore from '../stores/ResponsiveStore';
+  //import Footer from '../lib/components/Footer-notCalled.svelte';
 
   import '../app.css'
   //import '/src/pico.min.css'
@@ -46,39 +47,54 @@
   }
 </script>
 
-<nav class='navbar'>
-  <div class="logo">
-    <a href="/" on:click={(()=>toggleBurger())}><img src="/cg22Logo.png" alt="Cg22"></a>
+<div class="main-wrapper">
+  <nav class='navbar'>
+    <div class="logo">
+      <a href="/" on:click={(()=>toggleBurger())}><img src="/cg22Logo.png" alt="Cg22"></a>
+    </div>
+      {#if !$responsiveStore.burgerOn}  <!-- burger off -->
+        <div class="menuText nav-rhs"
+             style="display:flex; flex-direction:{$responsiveStore.menuFlexDirection}">
+          <a href="/blogList"    on:click={(()=>toggleBurger())}>List Blogs</a>
+          <a href="/blogForm"    on:click={(()=>toggleBurger())}>Add Blog</a>
+          <a href="/userForm"    on:click={(()=>toggleBurger())}>Add User</a>
+          <a href="/loginForm"   on:click={(()=>toggleBurger())}>Login</a>
+          <a href="/development" on:click={(()=>toggleBurger())}>development</a>
+        </div>
+      {:else}
+        <!-- mobile menu, icon (burger) -->
+        <button class='burger' on:click={(()=>toggleBurger())}>
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      {/if}
+  </nav>
+  <!--<div class='login-msg'>Logged In: { msg }</div>-->
+    <slot></slot>
+  <div class="footer">
+    <div class="copyright">Copyright 2023</div>
   </div>
-    {#if !$responsiveStore.burgerOn}  <!-- burger off -->
-      <div class="menuText nav-rhs"
-            style="display:flex;
-            flex-direction:{$responsiveStore.menuFlexDirection}"
-            transition:fade>
-        <a href="/blogList"    on:click={(()=>toggleBurger())}>List Blogs</a>
-        <a href="/blogForm"    on:click={(()=>toggleBurger())}>Add Blog</a>
-        <a href="/userForm"    on:click={(()=>toggleBurger())}>Add User</a>
-        <a href="/loginForm"   on:click={(()=>toggleBurger())}>Login</a>
-        <a href="/development" on:click={(()=>toggleBurger())}>development</a>
-      </div>
-    {:else}
-      <!-- mobile menu, icon (burger) -->
-      <button class='burger' on:click={(()=>toggleBurger())}>
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-    {/if}
+  <!--<Footer />-->
+</div>
 
-</nav>
-<div class='loginmsg'>Logged In: { msg }</div>
 <style>
+  .main-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
   .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: lightblue;
     padding: 10px;
+
+  }
+  .footer{
+    margin-top: auto;
+    text-align: center;
   }
   .navbar a {
     text-decoration: none;
@@ -104,26 +120,24 @@
     transform: scale(.7);
     border-radius: 0;
   }
-  .loginmsg {
+  /*
+  .login-msg {
     color: gray;
   }
+  */
   .burger {
-
     display: flex;
-    cursor: pointer;
-        /*
-    position: absolute;
-    top: .75rem;
-    right: 1rem;
-        */
     flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
+    justify-content: space-around;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    width: 25px;
     height: 21px;
-
+    background-color: lightgray;
   }
   .burger .bar {
-    height: 3px;
+    height: 2px;
     width: 100%;
     background-color: gray;
     border-radius: 10px;
@@ -145,29 +159,11 @@
       z-index: 1;
     }
   }
-/*
-
-desktop  (match all devices of that width and wider)
-  the 'min'imum width of this display mode is  767 pixels
-  @media screen and (min-width: 767px) {
-
-mobile  (match all devices of that width and narrower)
-  the 'max'imum width of this display mode is  767 pixels
-  @media screen and (max-width: 767px) {
-
-*/
+  .copyright{
+    color: #aaa;
+    font-size: 14px;
+    display: inline-block;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+  }
 </style>
-
-<slot></slot>
-
-<!--
-// Remove media query listener on destroy (user SSR)
-//onDestroy(() => {
-//  console.log('layout, mediaQuery 3', mediaQuery)
-//  if(browser){
-//    alert('Navbar, mediaListener removed')
-//  }
-//  //const mediaQuery = window.matchMedia("(max-width: 767px)");
-//  //mediaQuery.removeEventListener('change', setResponsive)
-//});
--->

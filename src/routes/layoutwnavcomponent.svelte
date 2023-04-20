@@ -1,0 +1,43 @@
+<script>
+  //
+  //  layout.svelte
+  //
+  //import { browser } from '$app/environment'
+  import { onMount } from 'svelte';
+
+  import responsiveStore from '../stores/ResponsiveStore';
+  $responsiveStore;
+
+  import '../app.css'
+  //import '/src/pico.min.css'
+  import userStore from "$stores/UserStore";
+  import Navbar from '../lib/components/Navbar.svelte';
+  import Footr from '../lib/components/Footr.svelte';
+
+
+
+  onMount(()=>{
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    if (window.matchMedia("(min-width: 768px)").matches) {
+      //  the width is > 786
+      console.log('window match')
+      $responsiveStore = { type:'desktop', burgerOn:false, menuFlexDirection:'row' };
+    }
+    const setResponsive = e => {
+      console.log('mediaQuery, window.innerWidth', window.innerWidth);
+      if(e.matches){
+        //console.log('The window is now over 768px');
+        $responsiveStore = { type:'desktop', burgerOn:false, menuFlexDirection:'row' };
+      } else {
+        //console.log('The window is now 768px or under');
+        $responsiveStore = { type:'mobile', burgerOn:true, menuFlexDirection:'column' };
+      }
+    }
+    mediaQuery.addEventListener('change', setResponsive);
+  });
+</script>
+
+
+<Navbar />
+<slot></slot>
+<Footr />
