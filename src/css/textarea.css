@@ -1,0 +1,24 @@
+textarea, input {
+  background-color: #f2f2f2;
+  padding: .5em;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  border: 1px solid lightgray;
+  outline: none;
+  font-weight: 500;
+  font-size: 16px;
+  width: 300px;
+  height: 50px;
+  transition: all 0.2s;
+}
+textarea:hover, input:hover {
+  cursor: pointer;
+  background-color: white;
+  box-shadow: 2px 1px 1px gray;
+}
+textarea:focus, input:focus {
+  cursor: text;
+  color: #333333;
+  background-color: white;
+  border-color: gray;
+}
