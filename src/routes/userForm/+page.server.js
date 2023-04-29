@@ -1,5 +1,5 @@
 import { User } from "../../hooks.server";
-import { invalid } from "@sveltejs/kit";
+import { fail } from "@sveltejs/kit";
 import fs from "fs";
 
 
@@ -21,7 +21,7 @@ export const actions = {
     console.log('server, image', file)
 
     if (!(file instanceof Object) || !file.name) {
-      return invalid(400, { missing: true });
+      return fail(400, { missing: true });
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
