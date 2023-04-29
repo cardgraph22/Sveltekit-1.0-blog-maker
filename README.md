@@ -48,7 +48,7 @@ src/routes/
     +page.svelte         - list blogs
     +page.server.svelte  - get blogs from the database
     +server.js           - delete a blog from list and server
-  /blogForm - Post a new blog to the forum (see 'Definitions' below)
+  /blogForm - Post a new blog to the forum
     +page.svelte - The form, or UI, to enter a blog
     +page.server.svelte
   /blogReplies - Post a reply
