@@ -22,6 +22,7 @@
 
 </script>
 
+<div class="blog-form">
 <h3>Add Blog Entry</h3>
 <!--{#if user == ''}<p class="admon">Please log in to add blog</p>{/if}-->
 
@@ -33,32 +34,42 @@
     <input type="text" id="title" name="title" bind:value={blog.title}>
     <label for="entry">Blog Entry</label>
     <textarea name="entry" id="entry" cols="30" rows="10" bind:value={blog.entry}></textarea>
+    <button class='btn'>AddBlog</button>
   </div>
-  <button>AddBlog</button>
 
   {#if showErrors}
     <p>Fill in all fields</p>
   {/if}
 </form>
+</div>
 
 <style>
-	:global(.touched:invalid) {
-		border-color: red;
-		outline-color: red;
-	}
+  .blog-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 30px;
+    /*background-color: white;*/
+  }
+  /*
   form {
     width: 400px;
     margin: 0 auto;
     text-align: center;
   }
+  */
 
-  /*
+
   .form-field {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
-  */
 
+
+  /*
   .form-field {
     margin:  18px auto;
   }
@@ -77,7 +88,7 @@
     width: 100%;
     border-radius: 6px;
   }
-
+  */
   /*
   .admon {
     color: rgb(120,24,74);

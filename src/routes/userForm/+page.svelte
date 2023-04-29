@@ -3,11 +3,11 @@
   //  userForm.svelte
   //
   import { enhance } from '$app/forms'
-  export let data;
-  console.log('form(data), loaded', data)
+  //export let data;
+  //console.log('form(data), loaded', data)
 
   export let form;
-  $: console.log('form(form), loaded', form)
+  //$: console.log('form(form), loaded', form)
 
   import userStore from "../../stores/UserStore";
   //let users = $userStore.user;
