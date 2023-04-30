@@ -25,7 +25,7 @@ export const actions = {
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    fs.writeFileSync(`src/uploads/${file.name}`, buffer, "base64");
+    fs.writeFileSync(`/uploads/${file.name}`, buffer, "base64");
     //return { filename: file.name };
 
 

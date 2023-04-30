@@ -20,7 +20,7 @@
     So click 'List Blogs', then click the conversation icon under the user to
      reveal comments/replies.</p>
     <figure class="fig-container">
-      <img src="/src/uploads/monoline.png" alt="noImg">
+      <img src="/uploads/monoline.png" alt="noImg">
       <figcaption>Hi, I'm Monoline</figcaption>
     </figure>
     <p>Then play around with the code and have fun!</p>

@@ -78,7 +78,7 @@
 {#if blog}
   <div class="blog-item">
     <div class="blog-profile">
-      <img src='/src/uploads/{getImage(blog)}' alt="noImage">
+      <img src='/uploads/{getImage(blog)}' alt="noImage">
       <h5>{blog.username}</h5>
       <button class='speech' disabled={!blog.replies.length}
         on:click={()=>(showBlogReplies())}>🗨️ {blog.replies.length}</button>

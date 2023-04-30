@@ -53,7 +53,7 @@
 <div class="replies">
   <div class="reply-item">
     <div class="reply-profile">
-      <img src='/src/uploads/{getImage(username)}' alt="noImage">
+      <img src='/uploads/{getImage(username)}' alt="noImage">
       <h4>{username}</h4>
     </div>
     <div class="blog-reply">

@@ -41,7 +41,7 @@
     <div class="blog-item">
       <div class="blog-profile">
         <h5>{blog.username}</h5>
-        <img src='/src/uploads/{getImage(blog)}' alt="noImage">
+        <img src='/uploads/{getImage(blog)}' alt="noImage">
       </div>           <!--  end  <div class="blog-profile"> -->
     <div class="blog-entry">
       <a href={`/blogList/${blog._id}`}>{blog.title}</a>
