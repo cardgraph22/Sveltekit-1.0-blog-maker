@@ -47,7 +47,7 @@
       <a href={`/blogList/${blog._id}`}>{blog.title}</a>
 
       <!--{#if blog.username === $userStore.username}-->
-        <button on:click={(()=>deleteBlog(blog, blog._id))}>X</button>
+        <button type='button' on:click={(()=>deleteBlog(blog, blog._id))}>X</button>
       <!--{/if}-->
         <!-- 'disabled' doesnt work if class='btns' added -->
         <!--  but,  .btn:disabled {...  works-->
