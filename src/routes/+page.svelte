@@ -64,6 +64,7 @@
     display: inline-block;
     text-align: center;
     width: 100%;
+    margin: 0;
   }
   figcaption {
     color: gray;
