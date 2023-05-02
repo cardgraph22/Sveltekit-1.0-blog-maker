@@ -20,7 +20,7 @@
   
   async function deleteBlog(blog, id) {
     console.log('deleteBlog, id', id)
-    let res = await fetch(`http://localhost:5173/blogList?id=${id}`, { method: 'DELETE' } )
+    let res = await fetch(`https://data.mongodb-api.com/app/data-ahopv/endpoint/data/v1/blogList?id=${id}`, { method: 'DELETE' } )
     res = await res.json();
     //  if the blog is deleted in the db, delete it in the list
     if(res.message === 'deleted'){
