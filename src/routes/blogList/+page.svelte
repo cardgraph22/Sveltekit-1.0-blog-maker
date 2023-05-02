@@ -58,6 +58,11 @@
 </div>                 <!--  end  <div class="blog-list"> -->
 
 <style>
+  button {
+    cursor: pointer;
+    z-index: 1;
+  }
+  
   h3 {
     text-align: center;
     color: gray;
