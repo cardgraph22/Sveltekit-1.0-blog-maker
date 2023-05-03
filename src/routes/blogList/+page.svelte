@@ -66,7 +66,7 @@
     cursor: pointer;
     z-index: 1;
   }
-  
+
   h3 {
     text-align: center;
     color: gray;
