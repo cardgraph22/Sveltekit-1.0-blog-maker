@@ -1,7 +1,7 @@
 
 <script>
   async function populateBlogs(){
-    const res = await fetch('http://localhost:5173/blogList',
+    const res = await fetch('https://sveltekit-1-0-blog-maker.vercel.app/blogList',
       {
         method: 'PUT',
       }
