@@ -3,10 +3,9 @@ import { Blog } from "../../hooks.server";
 //import mongoose from 'mongoose'
 import { Schema } from "mongoose"
 const blogSchema = new Schema({}, { strict: false });
-console.log('blogList, +server.js, blogs')
+console.log('blogList, +server.js, (blog functions)')
 
 export async function DELETE( { url } ){
-  console.log('delete blog, server.js, url', url)
   const id = url.searchParams.get('id')
   let resp = await Blog.deleteOne({_id:id})
   //console.log('delete blog, resp', resp.deletedCount)
@@ -22,10 +21,6 @@ export async function PUT(){
 }
 
 export async function POST(){
-
-  //  left off here - this (populateBlogs) actually works,
-  //  but i need to get reply(ies?) from 'blogList' and post
-  //  them to mongoose
   populateBlogs();
-  return new Response(JSON.stringify({ message: "Some Message" }), { status: 200 })
+  return new Response(JSON.stringify({ message: "populateBlogs (POST in server.js)" }), { status: 200 })
 }

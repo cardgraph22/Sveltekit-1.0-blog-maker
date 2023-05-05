@@ -41,7 +41,7 @@
 
   async function deleteBlog(blog, id) {
     //console.log('deleteBlog, id', id)
-    let res = await fetch(`https://sveltekit-1-0-blog-maker.vercel.app/blogList?id=${id}`, { method: 'DELETE' } )
+    let res = await fetch(`/blogList?id=${id}`, { method: 'DELETE' } )
     res = await res.json();
     //  if the blog is deleted in the db, delete it in the list
     if(res.message === 'deleted'){
