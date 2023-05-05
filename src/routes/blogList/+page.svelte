@@ -20,10 +20,7 @@
   
   async function deleteBlog(blog, id) {
     console.log('deleteBlog, id', id)
-    try {
-
-      //  this worked
-      
+    try {   // "it (fetch) can make relative requests on the server"
       let res = await fetch(`/blogList?id=${id}`, {   method: 'DELETE' } )
       console.log('deleteBlog, res', res)
       res = await res.json();

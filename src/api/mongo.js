@@ -10,8 +10,6 @@ export async function startMongo() {
   try {
     await mongoose.connect(MONGODB_URI)
     //console.log('connected to mongoose')
-    console.log('connected to mongoose, MONGODB_URI', MONGODB_URI)
-    //console.log('connected to mongoose, mongoose', mongoose)
   } catch(e) {
     console.log(e)
   }

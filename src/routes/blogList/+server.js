@@ -6,6 +6,7 @@ const blogSchema = new Schema({}, { strict: false });
 console.log('blogList, +server.js, blogs')
 
 export async function DELETE( { url } ){
+  console.log('delete blog, server.js, url', url)
   const id = url.searchParams.get('id')
   let resp = await Blog.deleteOne({_id:id})
   //console.log('delete blog, resp', resp.deletedCount)
