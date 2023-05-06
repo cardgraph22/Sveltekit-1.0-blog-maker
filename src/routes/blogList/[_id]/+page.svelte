@@ -1,4 +1,6 @@
 <script>
+
+  //  blogList[_id]
   export let data;
 
   import BlogReplies from "$lib/components/BlogReplies.svelte";
@@ -21,14 +23,6 @@
   let showMsg;
   let showReplies = false;
   let txtMsg  = "Add a comment";  //  textarea 'placeholder'
-
-  //  blogsStore is undefined when a browser refresh takes place
-  //  because this code is run on the server
-  //import blogsStore  from "$stores/BlogsStore";  //  all blogs
-  //console.log('blogItem, client, $blogsStore', $blogsStore)
-
-  //let blog = $blogsStore.filter(item => item._id == data._id)
-  //console.log('blogItem, +page.svelte, blog', blog)
 
   function getImage(blog){
     let tmp = users.filter(user=>user.username == blog.username)
@@ -73,7 +67,7 @@
   }
 </script>
 
-<h3>Your blog choice is {blog._id}</h3>
+<!--<h3>blog id is {blog._id}</h3>-->
 
 {#if blog}
   <div class="blog-item">
@@ -110,36 +104,31 @@
 <a href="/blogList">Back to list</a>
 
 <style>
-  h3 {
-    text-align: center;
-    color: white;
-  }
-
   p {
     color: gray;
   }
 
   .blog-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
     background-color: white;
     border-radius: 15px;
     padding: 5px;
     margin: 10px;
-    border: 1px solid gray;
+    border: 1px solid black;
   }
 
   .blog-profile {
     flex: 1;
     display: flex;
-    flex-direction: column;
     align-items: center;
   }
   .blog-entry {
     flex: 5;
     display: flex;
     flex-direction: column;
-    width: 400px;
+    /*width: 400px;*/
     border: 1px solid lightgray;
     border-radius: 15px;
     padding: 10px;

@@ -88,10 +88,7 @@
 </form>
 
 <style>
-	:global(.touched:invalid) {
-		border-color: red;
-		outline-color: red;
-	}
+
   form {
     width: 400px;
     margin: 0 auto;

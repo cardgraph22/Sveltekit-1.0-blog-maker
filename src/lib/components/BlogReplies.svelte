@@ -56,11 +56,11 @@
       <img src='/uploads/{getImage(username)}' alt="noImage">
       <h4>{username}</h4>
     </div>
-    <div class="blog-reply">
+    <div class="reply-entry">
       {#if depth==0}
-        <h2>this is a comment</h2>
+        <h4>this is a comment</h4>
       {:else}
-        <h2>this is a reply</h2>
+        <h4>this is a reply</h4>
       {/if}
       <h3>entry: {entry}</h3>
       <h4>depth: {depth}</h4>
@@ -86,11 +86,11 @@
     background-color: #f2f2f2;
     padding-left: 30px;
     margin-top: 20px;
-    box-sizing: border-box;
     overflow: hidden;
   }
   .reply-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
     background-color: white;
     border-radius: 15px;
@@ -101,14 +101,17 @@
   .reply-profile {
     flex: 1;
     display: flex;
-    flex-direction: column;
   }
-  .blog-reply {
+  .reply-entry {
     flex: 5;
     display: flex;
     flex-direction: column;
+    border: 1px solid lightblue;
+    border-radius: 5px;
   }
+  /*
   .sub-reply {
     box-sizing: border-box;
   }
+  */
 </style>

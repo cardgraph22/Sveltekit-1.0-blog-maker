@@ -4,7 +4,7 @@
   //
   //import { browser } from '$app/environment'
   import { onMount } from 'svelte';
-  import responsiveStore from '../stores/ResponsiveStore';
+  import responsiveStore from '$stores/ResponsiveStore';
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
 

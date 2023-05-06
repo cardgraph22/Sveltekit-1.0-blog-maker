@@ -5,6 +5,7 @@
 <script>
   import blogsStore  from "$stores/BlogsStore";  //  all blogs
   import usersStore  from "$stores/UsersStore";  //  all users
+  import responsiveStore from '$stores/ResponsiveStore';
   import userStore   from "$stores/UserStore";   //  logged in user
   
   //  get the blogs (automatically) from the +page.server load (GET)
@@ -41,26 +42,21 @@
 </script>
 
 <h3>Blogs</h3>
+{$responsiveStore.type}
 <div class="blog-list">
   {#each blogs as blog}
     <div class="blog-item">
       <div class="blog-profile">
         <h5>{blog.username}</h5>
         <img src='/uploads/{getImage(blog)}' alt="noImage">
-      </div>           <!--  end  <div class="blog-profile"> -->
-    <div class="blog-entry">
-      <a href={`/blogList/${blog._id}`}>{blog.title}</a>
-
-      <!--{#if blog.username === $userStore.username}-->
+      </div>
+      <div class="blog-entry">
+        <a href={`/blogList/${blog._id}`}>{blog.title}</a>
         <button type='button' on:click={(()=>deleteBlog(blog, blog._id))}>X</button>
-      <!--{/if}-->
-        <!-- 'disabled' doesnt work if class='btns' added -->
-        <!--  but,  .btn:disabled {...  works-->
-        <!--  this could go under 'user account management' -->
-      </div>           <!--  end  <div class="blog-entry"> -->
-    </div>             <!--  end  <div class="blog-item"> -->
-  {/each}              <!--  end  {#each blogs as blog}   -->
-</div>                 <!--  end  <div class="blog-list"> -->
+      </div>
+    </div>
+  {/each}
+</div>
 
 <style>
   button {
@@ -88,13 +84,6 @@
     border: 1px solid gray;
   }
 
-  img {
-    height: 30px;
-    width: 30px;
-    object-fit: contain;
-    border-radius: 50%;
-  }
-
   .blog-profile {
     flex: 1;
   }
@@ -120,3 +109,11 @@
 
 <!--<div class="blog-item" in:fade out:fade>-->
   <!--  nb - fade here fouls up other pages (flash effect)-->
+
+
+<!--{#if blog.username === $userStore.username}-->
+<!-- <button type='button' on:click={(()=>deleteBlog(blog, blog._id))}>X</button> -->
+<!--{/if}-->
+  <!-- 'disabled' doesnt work if class='btns' added -->
+  <!--  but,  .btn:disabled {...  works-->
+  <!--  this (delete blog) could go under 'user account management' -->
