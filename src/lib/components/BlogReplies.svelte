@@ -97,10 +97,13 @@
     padding: 5px;
     margin: 10px;
     border: 1px solid gray;
+    align-items: stretch;
   }
   .reply-profile {
     flex: 1;
     display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .reply-entry {
     flex: 5;

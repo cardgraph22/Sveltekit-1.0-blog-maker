@@ -1,6 +1,7 @@
 <script>
 
-  //  blogList[_id]
+  //  blogList/[_id]  - expanded blog item
+
   export let data;
 
   import BlogReplies from "$lib/components/BlogReplies.svelte";
