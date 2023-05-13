@@ -7,6 +7,9 @@
   import usersStore  from "$stores/UsersStore";  //  all users
   import responsiveStore from '$stores/ResponsiveStore';
   import userStore   from "$stores/UserStore";   //  logged in user
+
+  import Profile from "$lib/components/Profile.svelte";
+  import DeleteBlog from "$lib/components/DeleteBlog.svelte";
   
   //  get the blogs (automatically) from the +page.server load (GET)
   export let data;
@@ -19,26 +22,7 @@
   //  to add - no user logged in
   //let username = $userStore.username;
   
-  async function deleteBlog(blog, id) {
-    //console.log('deleteBlog, id', id)
-    try {   // "it (fetch) can make relative requests on the server"
-      let res = await fetch(`/blogList?id=${id}`, {   method: 'DELETE' } )
-      //console.log('deleteBlog, res', res)
-      res = await res.json();
-      //  if the blog is deleted in the db, delete it in the list
-      if(res.message === 'deleted'){
-        $blogsStore = $blogsStore.filter(item => item._id != blog._id)
-      }
-    } catch(error) {
-      console.error('catch error', error)
-    }
-  }
-
-  function getImage(blog){
-    let tmp = users.filter(user=>user.username == blog.username)
-    return (tmp.length>0 ? tmp[0].imagename : 'avatar.png')
-  }
-
+  
 </script>
 
 <h3>Blogs</h3>
@@ -47,23 +31,17 @@
   {#each blogs as blog}
     <div class="blog-item">
       <div class="blog-profile">
-        <h5>{blog.username}</h5>
-        <img src='/uploads/{getImage(blog)}' alt="noImage">
+        <Profile username={blog.username}/>
       </div>
       <div class="blog-entry">
         <a href={`/blogList/${blog._id}`}>{blog.title}</a>
-        <button type='button' on:click={(()=>deleteBlog(blog, blog._id))}>X</button>
+        <DeleteBlog blog={blog}/>
       </div>
     </div>
   {/each}
 </div>
 
 <style>
-  button {
-    cursor: pointer;
-    z-index: 1;
-  }
-
   h3 {
     text-align: center;
     color: gray;

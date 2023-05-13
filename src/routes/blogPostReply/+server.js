@@ -6,7 +6,6 @@ export const PUT = async({request})=>{
     {$set: {replies: body.replies}},
     {new: true})
       .then( result=> {
-       //console.log('findByIdAndUpdate result', result);
        return result;
   });
   return new Response(JSON.stringify({ message: resp}), { status: 200 })

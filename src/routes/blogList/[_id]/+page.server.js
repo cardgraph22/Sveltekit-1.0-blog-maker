@@ -1,5 +1,5 @@
 //
-//  blogItem - page.server.js
+//  blogList/[_id] - page.server.js
 //
 //    return 1 blog and all users
 //

@@ -1,4 +1,5 @@
 <script>
+  import PostReply from "$lib/components/PostReply.svelte";
   export let blog;
   export let reply;
   const {username, entry, replies} = reply;
@@ -7,9 +8,9 @@
   //console.log('BlogReplies, currentUser', currentUser)
 
   import { fade } from "svelte/transition";
-
   import blogsStore from "../../stores/BlogsStore";
-  import usersStore from "$stores/UsersStore";  
+  import usersStore from "$stores/UsersStore";
+  import Profile from "$lib/components/Profile.svelte";
 
   let msg = '';
   let txtMsg  = "Add a reply";  //  textarea 'placeholder'
@@ -21,6 +22,10 @@
       replies: [],
       date: Date()
     }
+
+    //  the 'input argument' handles the 'depth'
+
+
 
     replyToPost.replies.push(reply);
 
@@ -36,25 +41,14 @@
       $blogsStore = $blogsStore;
     })
   }
-  function getImage(username){
-    //console.log('BlogReplies, getImage, username', username);
-    if(!username)return 'avatar.png';
-    let tmp = $usersStore.filter(user=>user.username === username);
-    if(tmp.length>0 && tmp[0].imagename)return tmp[0].imagename;
-    return 'avatar.png';
 
-    //let tmp2 = (tmp.length>0 ? tmp[0].imagename : 'avatar.png')
-    ////                            true               false
-  }
-  
 </script>
 
 <!--<div class="replies" in:fade out:fade>-->
 <div class="replies">
   <div class="reply-item">
     <div class="reply-profile">
-      <img src='/uploads/{getImage(username)}' alt="noImage">
-      <h4>{username}</h4>
+      <Profile username={username}/>
     </div>
     <div class="reply-entry">
       {#if depth==0}
@@ -65,7 +59,14 @@
       <h3>entry: {entry}</h3>
       <h4>depth: {depth}</h4>
       <textarea  class='text-area' bind:value={msg} placeholder={txtMsg}></textarea>
-      <button class='btn' on:click={()=>postReply(reply, msg)}>Post</button>
+
+
+      <PostReply bind:blog={blog} replyToPost={reply} entryText={msg} />
+
+
+      <!-- <button class='btn' on:click={()=>postReply(reply, msg)}>Post</button> -->
+
+
       <!--<p>Sub-replies = {replies.length}</p>-->
     </div>
   </div>
