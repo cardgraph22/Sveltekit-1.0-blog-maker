@@ -19,17 +19,22 @@
 </script>
 
 <nav class='navbar'>
-  <div class="logo">
-    <a href="/" on:click={(()=>toggleBurger())}><img src="/cg22Logo.png" alt="Cg22"></a>
+  <div class="nav-lhs">
+    <div class="logo">
+      <a href="/" on:click={(()=>toggleBurger())}><img src="/cg22Logo.png" alt="Cg22"></a>
+    </div>
+    <span class='username'>{msg}</span>
   </div>
     {#if !$responsiveStore.burgerOn}  <!-- burger off -->
       <div class="menuText nav-rhs" style="display:flex;
-         flex-direction:{$responsiveStore.menuFlexDirection}" transition:fade>
+         flex-direction:{$responsiveStore.menuFlexDirection}">
         <a href="/blogList"    on:click={(()=>toggleBurger())}>List Blogs</a>
         <a href="/blogForm"    on:click={(()=>toggleBurger())}>Add Blog</a>
         <a href="/userForm"    on:click={(()=>toggleBurger())}>Add User</a>
         <a href="/loginForm"   on:click={(()=>toggleBurger())}>Login</a>
-        <a href="/development" on:click={(()=>toggleBurger())}>development</a>
+        {#if $userStore.username==='admin'}
+          <a href="/development" on:click={(()=>toggleBurger())}>development</a>
+        {/if}
       </div>
     {:else}
       <!-- mobile menu, icon (burger) -->
@@ -59,10 +64,10 @@
   .navbar a:hover {
     color: black;
   }
-  .nav-rhs {
-    gap: 10px;
+  .nav-lhs {
+    display: flex;
+    align-items: center;
   }
-
   .logo {
     height: 30px;
     width: 30px;
@@ -70,13 +75,19 @@
     cursor: pointer;
     background-color: white;
   }
+  .username {
+    padding-left: 15px;
+    color: gray;
+  }
   img {
     height: 30px;
     width: 30px;
     transform: scale(.7);
     border-radius: 0;
   }
-
+  .nav-rhs {
+    gap: 10px;
+  }
   .burger {
     display: flex;
     flex-direction: column;

@@ -18,14 +18,14 @@ export const actions = {
     let username  = formData.get('username')
     let password  = formData.get('password')
     let file = formData.get('image')
-    console.log('server, image', file)
+    //console.log('server, image', file)
 
     if (!(file instanceof Object) || !file.name) {
       return fail(400, { missing: true });
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    fs.writeFileSync(`/uploads/${file.name}`, buffer, "base64");
+    fs.writeFileSync(`./static/uploads/${file.name}`, buffer, "base64");
     //return { filename: file.name };
 
 
@@ -54,7 +54,7 @@ export const actions = {
           //msg3: JSON.parse(JSON.stringify(result))
         }];
       } else {
-        console.log('add new user here')
+        //console.log('add new user here')
         //  user doesnt already exist, add
         const user = new User({
          username : username,
@@ -64,7 +64,7 @@ export const actions = {
          //imageblob: imageblob
         })
         result = await user.save();
-        console.log('userForm, result of save', result)
+        //console.log('userForm, result of save', result)
         return { msg: 'new user added'}
       }
     }

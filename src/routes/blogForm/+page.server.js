@@ -22,7 +22,7 @@ export const actions = {
     blogs.push(blog)
     blog.save()
     .then((result) => {
-      console.log('blogForm, page.server.js, save result', result)
+      //console.log('blogForm, page.server.js, save result', result)
       //res.send(result)
     })
     .catch((err) => {

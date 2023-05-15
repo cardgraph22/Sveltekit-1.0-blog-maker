@@ -1,5 +1,5 @@
 <!--
-  blogList - This combines prj23 BlogList and BlogEntries
+  blogList
 -->
 
 <script>
@@ -26,7 +26,7 @@
 </script>
 
 <h3>Blogs</h3>
-{$responsiveStore.type}
+<!--{$responsiveStore.type}--><!-- desktop or mobile -->
 <div class="blog-list">
   {#each blogs as blog}
     <div class="blog-item">

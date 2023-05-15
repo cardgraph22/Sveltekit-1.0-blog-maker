@@ -35,8 +35,8 @@
     reader.addEventListener('load', function(){
       console.log('load image')
       imageblob=reader.result
-      console.log('reader result', reader.result)
-      console.log('imageblob', imageblob)
+      //console.log('reader result', reader.result)
+      //console.log('imageblob', imageblob)
     })
     if(image){
       console.log('read image')

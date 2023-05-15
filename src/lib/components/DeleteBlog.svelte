@@ -23,6 +23,9 @@
 <style>
   button {
     cursor: pointer;
+    color: magenta;
+    border: none;
+    background-color: white;
   }
 
 </style>

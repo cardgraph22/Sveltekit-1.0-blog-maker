@@ -12,13 +12,6 @@
   //import '/src/pico.min.css'
   import userStore from "$stores/UserStore";
 
-  let msg = 'No one logged in'
-  $: {
-    $userStore;
-    if($userStore.username != '') msg = $userStore.username;
-    //console.log('layout, $userStore', $userStore);
-  }
-
   onMount(()=>{
     const mediaQuery = window.matchMedia("(min-width: 768px)");
     if (window.matchMedia("(min-width: 768px)").matches) {
@@ -45,7 +38,6 @@
   <div class='navbar'>
     <Navbar />   
   </div>
-  <!--<div class='login-msg'>Logged In: { msg }</div>-->
   <div class="content">
     <slot></slot>
   </div>

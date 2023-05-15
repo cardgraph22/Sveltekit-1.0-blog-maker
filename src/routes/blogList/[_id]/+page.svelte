@@ -51,19 +51,13 @@
       <p class='entry'>{blog.entry}</p>
       <textarea class='text-area' bind:value={entryText} placeholder={txtMsg}></textarea>
       <div class="btns">
-
-
         <PostReply bind:blog={blog} replyToPost={blog} {entryText} />
-
-
-        <!-- <button class='btn' on:click={()=>postReply(blog, entry)}>Post</button> -->
-
-
         <!-- {#if blog.username === $userStore.username} -->
-          <DeleteBlog blog={blog}/>
+        <DeleteBlog blog={blog}/>
         <!-- {/if} -->
       </div>
     </div>           <!--  end  <div class="blog-entry"> -->
+    <a class='backToList' href="/blogList">Back to list</a>
   </div>             <!--  end  <div class="blog-item">  -->
   {#if showReplies}
       {#if blog.replies.length > 0}
@@ -76,8 +70,6 @@
     {/if}
   {/if}
 
-
-<a href="/blogList">Back to list</a>
 
 <style>
   p {
@@ -99,15 +91,18 @@
     flex: 1;
     display: flex;
     align-items: center;
+    gap: 5px;
   }
   .blog-entry {
     flex: 5;
     display: flex;
     flex-direction: column;
-    /*width: 400px;*/
+    min-width: 80%;
     border: 1px solid lightgray;
     border-radius: 15px;
     padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
   .entry {
     color: #303030
@@ -118,6 +113,7 @@
 
   .btns {
     display: flex;
+    align-items: center;
   }
   .speech {
     width: 70px;
@@ -129,5 +125,10 @@
   .speech:disabled{
     color: gray;
     cursor: auto;
+  }
+  .backToList {
+    color: gray;
+    cursor: pointer;
+    text-decoration: none;
   }
 </style>
