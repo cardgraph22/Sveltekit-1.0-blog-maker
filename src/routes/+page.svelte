@@ -2,32 +2,21 @@
   main page
 -->
 <script>
-  import Sidebar1 from "../lib/components/Sidebar1.svelte";
-  import Sidebar2 from "../lib/components/Sidebar2.svelte";
+  import Homepage from "$lib/components/Homepage.svelte";
+  import SidebarGames from "$lib/components/Sidebars/SidebarGames.svelte";
+  import SidebarCities from "$lib/components/Sidebars/SidebarCities.svelte";
+  import SidebarUsers from "$lib/components/Sidebars/SidebarUsers.svelte";
 </script>
 <div class="wrapper">
   <div class="sidebar1">
-    <Sidebar1 />
+    <SidebarGames />
+    <SidebarUsers />
   </div>
   <div class="main">
-    <h2>Welcome to Blog-Maker</h2>
-    <p>This project is intended for Sveltekit 1.0 developers.</p>
-    <p>Its demonstrates recursive nested blog replies using the element:</p>
-    <p class='coded'>&lt;svelte:self&gt;</p>
-    <p>The documentation is in the README.MD file on github.
-    As an added bonus, it uses MongoDB with Mongoose (if you're interested).
-    As a double added bonus, it show how to upload images (/userForm)
-    So click 'List Blogs', then click the conversation icon under the user to
-     reveal comments/replies.</p>
-    <figure class="fig-container">
-      <img src="/uploads/monoline.png" alt="noImg">
-      <figcaption>Hi, I'm Monoline</figcaption>
-    </figure>
-    <p>Then play around with the code and have fun!</p>
-    <p>NB - This is still a work in progress: better css, authentication, et al</p>
+    <Homepage />
   </div>
   <div class="sidebar2">
-    <Sidebar2 />
+    <SidebarCities />
   </div>
 </div>
 <style>
@@ -37,40 +26,19 @@
   .main {
     flex: 3;
     border: 1px solid gray;
+    padding: 10px;
   }
   .sidebar1 {
     flex: 1;
     border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
   }
   .sidebar2 {
     flex: 2;
     border: 1px solid orange;
   }
-  
-  h2 {
-    font-size: 1.85em;
-
-    margin: .8em 0;
-  }
-  p {
-    font-size: 1.3em;
-
-  }
-  p.coded {
-    text-align: center;
-    color:blue;
-  }
-  figure {
-    display: inline-block;
-    text-align: center;
-    width: 100%;
-    margin: 0;
-  }
-  figcaption {
-    color: gray;
-    font-style: italic;
-  }
-  
+    
   @media screen and (max-width: 767px) {
     .wrapper {
       flex-direction: column;

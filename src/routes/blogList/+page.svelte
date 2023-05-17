@@ -12,10 +12,9 @@
   import DeleteBlog from "$lib/components/DeleteBlog.svelte";
   
   //  get the blogs (automatically) from the +page.server load (GET)
-  export let data;
+
   // blogsStore controls blogs, which can be modified in other components
-  $blogsStore = data.blogs;
-  $usersStore = data.users;
+  
   $:blogs = $blogsStore;
   $:users = $usersStore;
 

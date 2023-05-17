@@ -23,10 +23,6 @@
       date: Date()
     }
 
-    //  the 'input argument' handles the 'depth'
-
-
-
     replyToPost.replies.push(reply);
 
     fetch( '/blogPostReply', {
@@ -59,15 +55,7 @@
       <h3>entry: {entry}</h3>
       <h4>depth: {depth}</h4>
       <textarea  class='text-area' bind:value={msg} placeholder={txtMsg}></textarea>
-
-
       <PostReply bind:blog={blog} replyToPost={reply} entryText={msg} />
-
-
-      <!-- <button class='btn' on:click={()=>postReply(reply, msg)}>Post</button> -->
-
-
-      <!--<p>Sub-replies = {replies.length}</p>-->
     </div>
   </div>
 
@@ -105,6 +93,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 5px;
   }
   .reply-entry {
     flex: 5;
@@ -112,6 +101,8 @@
     flex-direction: column;
     border: 1px solid lightblue;
     border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
   /*
   .sub-reply {

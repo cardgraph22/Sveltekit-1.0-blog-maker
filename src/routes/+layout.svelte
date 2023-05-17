@@ -8,9 +8,14 @@
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
 
+  import blogsStore  from "$stores/BlogsStore";  //  all blogs
+  import usersStore  from "$stores/UsersStore";  //  all users
+  export let data;
+  $blogsStore = data.blogs;
+  $usersStore = data.users;
+
   import '/src/css/app.css'
   //import '/src/pico.min.css'
-  import userStore from "$stores/UserStore";
 
   onMount(()=>{
     const mediaQuery = window.matchMedia("(min-width: 768px)");
