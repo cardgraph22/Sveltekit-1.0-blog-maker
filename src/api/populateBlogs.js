@@ -1,4 +1,4 @@
-import { Blog } from "../hooks.server";
+import { Blog } from "/src/hooks.server";
 export function populateBlogs() {
   //console.log('---populate blogs---')
   let blogs = [

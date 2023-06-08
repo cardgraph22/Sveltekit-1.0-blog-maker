@@ -1,5 +1,5 @@
 import { populateBlogs } from '$api/populateBlogs'
-import { Blog } from "../../hooks.server";
+import { Blog } from "/src/hooks.server";
 //import mongoose from 'mongoose'
 import { Schema } from "mongoose"
 const blogSchema = new Schema({}, { strict: false });

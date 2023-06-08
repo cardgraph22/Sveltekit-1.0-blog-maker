@@ -4,5 +4,5 @@
 
 <h3>Users</h3>
 {#each $usersStore as user}
-  {user.username}&nbsp;
+  <p>{user.username}</p>
 {/each}

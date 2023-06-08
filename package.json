@@ -15,6 +15,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"mongoose": "^6.10.0"
+		"mongoose": "^6.10.0",
+		"zod": "^3.21.4"
 	}
 }

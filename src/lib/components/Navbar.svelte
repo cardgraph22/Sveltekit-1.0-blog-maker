@@ -30,6 +30,7 @@
          flex-direction:{$responsiveStore.menuFlexDirection}">
         <a href="/blogList"    on:click={(()=>toggleBurger())}>List Blogs</a>
         <a href="/blogForm"    on:click={(()=>toggleBurger())}>Add Blog</a>
+        <a href="/comboForm"   on:click={(()=>toggleBurger())}>Combo Form</a>
         <a href="/userForm"    on:click={(()=>toggleBurger())}>Add User</a>
         <a href="/loginForm"   on:click={(()=>toggleBurger())}>Login</a>
         {#if $userStore.username==='admin'}

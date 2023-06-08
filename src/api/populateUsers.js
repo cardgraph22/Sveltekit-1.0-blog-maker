@@ -1,4 +1,4 @@
-import { User } from "../hooks.server";
+import { User } from "/src/hooks.server";
 export function populateusers() {
   //console.log('---populate users---')
   let users = [

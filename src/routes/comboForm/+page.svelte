@@ -1,13 +1,25 @@
 <script>
   //
-  //  userForm.svelte
+  //  comboForm.svelte
   //
   import { enhance } from '$app/forms'
   //export let data;
   //console.log('form(data), loaded', data)
 
   export let form;
-  //$: console.log('form(form), loaded', form)
+  $: console.log('comboForm (form), client loaded', form)
+
+  //  shouldnt this also log in adduser?
+  $: {
+    if(form?.username){
+      //  this is the logged in user
+      //console.log('loginForm, form', form)
+      $userStore._id = form._id;
+      $userStore.username = form.username;
+      $userStore.imagename = form.imagename;
+      console.log('comboForm, $userStore', $userStore)
+    }
+  }
 
   import userStore from "/src/stores/UserStore";
   let users = $userStore.user;
@@ -21,7 +33,7 @@
   }
   //let confPwd = '';
 
-  let newUser = true;
+  let newUser = false;
   let imgName = '';
 
   let uploadedImage = '';
@@ -52,11 +64,15 @@
 
 </script>
 
-<h3>New User</h3>
-<!--{#if user == ''}<p class="admon">Please log in to add user</p>{/if}-->
+{#if newUser}
+  <h3>New User</h3>
+{:else}
+  <h3>Login</h3>
+{/if}
 
 <form method="POST" use:enhance enctype="multipart/form-data">
   <div class="form-field">
+    <input type="hidden" name="newUser" value={newUser} />
     <label for="userName">User Name</label>
     <input type="text" id="username" name="username" bind:value={user.username}>
     {#if form?.errors?.username}
@@ -67,17 +83,30 @@
     {#if form?.errors?.password}
       <h6>{form?.errors?.password[0]}</h6>
     {/if}
-    <label for="entry">Confirm Password</label>
-    <input type="text" id="confPwd" name="confPwd" bind:value={user.confPwd}>
-    {#if form?.errors?.confPwd}
-      <h6>{form?.errors?.confPwd[0]}</h6>
-    {/if}
-    <label for="imagename">Image</label>
-    <input name='imagename' on:change={handleImageUpload} type="file" bind:value={user.imagename} />
-    {#if form?.errors?.imagename}
-      <h6>{form?.errors?.imagename[0]}</h6>
+    {#if newUser}
+      <label for="entry">Confirm Password</label>
+      <input type="text" id="confPwd" name="confPwd" bind:value={user.confPwd}>
+      {#if form?.errors?.confPwd}
+        <h6>{form?.errors?.confPwd[0]}</h6>
+      {/if}
+      <label for="imagename">Image</label>
+      <input name='imagename' on:change={handleImageUpload} type="file" bind:value={user.imagename} />
+      {#if form?.errors?.imagename}
+        <h6>{form?.errors?.imagename[0]}</h6>
+      {/if}
     {/if}
   </div>
+
+  <!--
+
+    Left off here
+      formaction attribute - wants to use the same data (i think)
+        with (completely?) different action
+      I want to use 'augmented' (more) data and 'augmented' (more)
+        functionality
+
+  -->
+
   <!--
   {#if newUser}
     <ImgUpload bind:imgName/>
@@ -87,17 +116,26 @@
   {#if uploadedImage}
     <img src={uploadedImage} alt="noimage(yet)">
   {/if}
-  <button>Add User</button>
 
+  {#if newUser}
+    <button>Add User</button>
+  {:else}
+    <button>Login</button>
+  {/if}
+
+  <p>JSON.stringify(form) is </p>
   <p>{JSON.stringify(form)}</p>
 
+  
   {#if form?.success}
     {JSON.stringify(form)}
     <p>successfully added user</p>
   {/if}
 
 </form>
-
+<!--  nb - if this button is inside the form tags, then clicking
+           it 'submits' the form  -->
+<button id='newUser' on:click={() => newUser = !newUser}>New User?</button>
 <style>
 
   form {

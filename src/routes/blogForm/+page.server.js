@@ -1,7 +1,7 @@
 //
 //  blogForm - +page.server
 //
-import { Blog } from "../../hooks.server";
+import { Blog } from "/src/hooks.server";
   let blogs = []
 
 export const actions = {
