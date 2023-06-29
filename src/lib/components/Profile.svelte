@@ -9,4 +9,4 @@
 </script>
 
 <h5>{username}</h5>
-<img src='/uploads/{getImage(username)}' alt="noImage">
+<img class="object-cover h-16 w-16" src='/uploads/{getImage(username)}' alt="noImage">

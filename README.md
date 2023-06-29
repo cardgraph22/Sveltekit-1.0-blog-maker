@@ -1,75 +1,38 @@
-# Sveltekit 1.0 blog maker
+# create-svelte
 
- Sveltekit 1.0 blog maker with recursive replies.
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
-This is a blog maker which allows nested, indented replies.
-It also uses Mongoose (MongoDB) for the database, and has basic
-login (no authentication, yet) and image upload capabilities.
+## Creating a project
 
-The replies are nested and indented based on their 'depth':
-<pre>
-  Blog entry
-    Comment
-      Reply              depth 0  
-        Sub-reply        depth 1  
-          Sub-sub-reply  depth 2  
-        Sub-reply        depth 1  
-      Comment
-   and so on
-</pre>
-The pseudo-code looks something like this:
+If you're seeing this, you've probably already done this step. Congrats!
 
-```html
-<pre>
-  <div class="replies" in:fade out:fade>
-    {#each blogs as blog}
-      {#each blog.replies as reply}
-        <BlogReplies {blog} {reply}/>
-          {#each replies as reply}
-            <svelte:self {blog} bind:reply depth={++depth} />
-          {/each}
-      {/each}
-    {/each}
-   </div>
+```bash
+# create a new project in the current directory
+npm create svelte@latest
 
-  <style>
-    .replies {
-      padding-left: 30px;
-    }
-  </style>
-</pre>
+# create a new project in my-app
+npm create svelte@latest my-app
 ```
-so the recursed sub-reply children are indented from their reply parents.
 
-The structure code is
-<pre>
-src/routes/
-  /blogList
-    +page.svelte         - list blogs
-    +page.server.svelte  - get blogs from the database
-    +server.js           - delete a blog from list and server
-  /blogForm - Post a new blog to the forum
-    +page.svelte - The form, or UI, to enter a blog
-    +page.server.svelte
-  /blogReplies - Post a reply
-    +server.js - Post either a comment or a reply to a comment
-  /userForm - Add a new user to the forum, ie, allow a user
-              to post blogs, comments, and replies
-  /loginForm - Allow an existing user to log in
-</pre>
-The database is MongoDB running on its default port, 27017,
-using Mongoose as the interface.
+## Developing
 
-MongoDB codes
- Schemas and Models are defined in src/api/mongo.js and schemas.js
- and the MongoDB connection is in src/hooks.server.js.
- The database name is prj23, and the collections are blogs and users.
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-To run this, download it, then run
-  npm install
-then
-  npm run dev
-from either a command line or a Visual Code terminal
+```bash
+npm run dev
 
-This is a work in progress.
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
 
+## Building
+
+To create a production version of your app:
+
+```bash
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

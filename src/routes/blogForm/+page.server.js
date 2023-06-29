@@ -11,7 +11,7 @@ export const actions = {
     let username = formData.get('username')
     let title = formData.get('title')
     let entry = formData.get('entry')
-    const id = crypto.randomUUID()
+    //const id = crypto.randomUUID()
     if(username == '')username='anonymous'
     const blog = new Blog({
       username: username,

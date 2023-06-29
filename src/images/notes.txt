@@ -1,0 +1,5 @@
+12/02/22
+
+The default alignment of an inline-block element is basically "baseline",
+and it behaves a bit unpredictably.  [for my pre-flex try where the div's
+didn't line up]
