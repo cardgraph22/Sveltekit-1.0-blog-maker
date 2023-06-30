@@ -23,7 +23,7 @@
 
 <div class="w-9/12 m-auto">
 <Navbar let:hidden let:toggle>
-  <NavBrand href="/"><img src="/src/images/cg22Logo.png"
+  <NavBrand href="/"><img src="/cg22Logo.png"
      class="mr-3 h-6 sm:h-9" alt="cg22 Logo"/>
   </NavBrand>
   <NavHamburger on:click={toggle} />
