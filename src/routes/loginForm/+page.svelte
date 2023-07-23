@@ -8,7 +8,7 @@
   import userStore from "$stores/UserStore";
   export let form;
 
-  $: console.log('client, form', form)
+  //$: console.log('client, form', form)
 
   $: {
     if(form?.username){

@@ -1,8 +1,11 @@
 <script>
-  import PostReply from "$lib/components/PostReply.svelte";
   export let blog;
   export let reply;
   const {username, entry, replies} = reply;
+  import { page } from '$app/stores';  
+  let p = $page.url.pathname;
+  console.log('BlogReplies page', p)
+
 
   export let depth = 0;
   //console.log('BlogReplies, currentUser', currentUser)
@@ -25,7 +28,7 @@
 
     replyToPost.replies.push(reply);
 
-    fetch( '/blogPostReply', {
+    fetch({p}, {
       method: 'PUT',
       headers: {
         "content-type": "application/json"
@@ -40,7 +43,6 @@
 
 </script>
 
-<!--<div class="replies" in:fade out:fade>-->
 <div class="replies">
   <div class="reply-item">
     <div class="reply-profile">
@@ -55,7 +57,7 @@
       <h3>entry: {entry}</h3>
       <h4>depth: {depth}</h4>
       <textarea  class='text-area' bind:value={msg} placeholder={txtMsg}></textarea>
-      <PostReply bind:blog={blog} replyToPost={reply} entryText={msg} />
+      <button class='btn' on:click={()=>postReply(reply, msg)}>Post</button>
     </div>
   </div>
 

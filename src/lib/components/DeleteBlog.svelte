@@ -18,13 +18,13 @@
 
 </script>
 
-<button type='button' on:click={(()=>deleteBlog(blog, blog._id))}>X</button>
+<button type='button' on:click={(()=>deleteBlog(blog, blog._id))}>Delete</button>
 
 <style>
   button {
     cursor: pointer;
-    color: magenta;
-    border: none;
+    color: red;
+    border: red;
     background-color: white;
   }
 

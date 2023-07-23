@@ -24,7 +24,7 @@ const loginSchema = z.object({
 export async function load({ fetch, params }) {
   //const res = await fetch(`/api/items/${params.id}`);
   //const item = await res.json();
-  console.log('login server load')
+  //console.log('login server load')
   return { msg: 'loginform load (data)' };
 }
 
@@ -35,11 +35,11 @@ export const actions = {
   default: async ({ request }) => {
     const formData = await request.formData()
     const formDataObj = Object.fromEntries(formData)
-    console.log('formData submitted', formData)
-    console.log('formDataObj extracted', formDataObj)
+    //console.log('formData submitted', formData)
+    //console.log('formDataObj extracted', formDataObj)
     let username  = formData.get('username')
     let password  = formData.get('password')
-    console.log('server, extract username, password', username, password)
+    //console.log('server, extract username, password', username, password)
 
     //  note: zod wants 'extracted' formData, Object.fromEntries,
     //    whereas svelte formData.get wants doesn't
@@ -50,13 +50,13 @@ export const actions = {
     try {
       //  validation
       const result = loginSchema.parse(formDataObj)
-      console.log('SUCCESS')
-      console.log(result)
+      //console.log('SUCCESS')
+      //console.log(result)
       //  here, the validation passed, now to do the actual database operation
       try{
         let result = await User.find({username: username, password: password})
         if(result.length > 0){
-          console.log('user exists, log in', result)
+          //console.log('user exists, log in', result)
           msg = 'User Logged In'
           return  {
             success: true,

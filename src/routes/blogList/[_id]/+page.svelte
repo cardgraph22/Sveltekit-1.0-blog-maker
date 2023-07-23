@@ -1,8 +1,11 @@
 <script>
-
   //  blogList/[_id]  - expanded blog item
+  import { Button, Textarea, Tooltip } from 'flowbite-svelte';
+  import { enhance } from '$app/forms';
 
   export let data;
+  //export let form;
+  //console.log('/blogList/[_id], page.svelte, form',form);
 
   import blogsStore  from "$stores/BlogsStore";  //  all blogs
   import usersStore  from "$stores/UsersStore";  //  all users
@@ -10,7 +13,6 @@
 
   import BlogReplies from "$lib/components/BlogReplies.svelte";
   import DeleteBlog  from "$lib/components/DeleteBlog.svelte";
-  import PostReply   from "$lib/components/PostReply.svelte";
   import Profile     from "$lib/components/Profile.svelte";
 
   $usersStore = data.users;
@@ -18,19 +20,17 @@
 
   //  to add - no user logged in
   let username = $userStore.username;
-
-  //console.log('blogItem, client, data', data)
-  //console.log('blogItem, client, users', users)
-  //console.log('blogItem, client, $usersStore', $usersStore)
+  console.log('page, username', username)
   let blog = data.blog[0]
 
   let entryText;
   let showMsg;
   let showReplies = false;
   let txtMsg  = "Add a comment";  //  textarea 'placeholder'
+  let depth = 0;
+  let entry, replies;
 
-
-  function showBlogReplies(){  // controlled by speech icon 🗨️
+  function showBlogReplies(){  // controlled (toggled) by speech icon 🗨️
     showReplies =! showReplies;
     if(showReplies==true)showMsg = 'Hide Replies'
   }
@@ -40,96 +40,84 @@
 <!--<h3>blog id is {blog._id}</h3>-->
 
 {#if blog}
-  <div class="blog-item">
-    <div class="blog-profile">
-      <Profile username={blog.username}/>
-      <button class='speech' disabled={!blog.replies.length}
-        on:click={()=>(showBlogReplies())}>🗨️ {blog.replies.length}</button>
-    </div>           <!--  end  <div class="blog-profile"> -->
-    <div class="blog-entry">
-      <h4>{blog.title}</h4>
-      <p class='entry'>{blog.entry}</p>
-      <textarea class='text-area' bind:value={entryText} placeholder={txtMsg}></textarea>
-      <div class="btns">
-        <PostReply bind:blog={blog} replyToPost={blog} {entryText} />
-        <!-- {#if blog.username === $userStore.username} -->
-        <DeleteBlog blog={blog}/>
-        <!-- {/if} -->
+  <div class="flex items-center">
+    <Profile username={blog.username}/>
+    <Button color="light" disabled={!blog.replies.length}
+      on:click={()=>(showBlogReplies())}>🗨️ {blog.replies.length}
+    </Button>
+    <Tooltip color="blue">Show Comments</Tooltip>
+    <h4>{blog.title}</h4>
+  </div>
+
+  <h4>{blog.entry}</h4>
+
+  <form method="POST" action="?/comment" use:enhance>
+    <input value={JSON.stringify({blog})} name="blog" type="hidden">
+    <input value={username} name="LIusername" type="hidden">
+    <Textarea class="mb-4" placeholder="Write a comment" name=entryText>
+      <div slot="footer" class="flex items-center justify-between">
+        <Button type="submit">Post comment</Button>
       </div>
-    </div>           <!--  end  <div class="blog-entry"> -->
-    <a class='backToList' href="/blogList">Back to list</a>
-  </div>             <!--  end  <div class="blog-item">  -->
+    </Textarea>
+  </form>
+
   {#if showReplies}
       {#if blog.replies.length > 0}
-        {#each blog.replies as reply}
+        {#each blog.replies as reply, idx}
+
           <BlogReplies {blog} {reply}/>
+
+          <!-- i want to pass blog.replies[n] -->
+
+
+          <!-- svelte:self will work here because it will cause
+               the whole routine to run, including coments
+
+               but, I believe BlogReplies still uses the same actions
+               for this route (ie, reply action in page.server.js)
+               which means i dont have to use the
+                 <PostReply bind:blog={blog} replyToPost={reply} entryText={msg} />
+                 (in BlogReplies)
+                 which calls
+                 <button on:click={()=>postReply(replyToPost, entryText)}>Post</button>
+                 which calls
+                 fetch( '/blogPostReply', {
+                 which does the actual
+                 let resp = await Blog.findByIdAndUpdate(
+
+               i can use page.server to do the
+                 import { Blog } from "/src/hooks.server";
+                   export const PUT = async({request})=>{
+                     const body = await request.json()
+                     let resp = await Blog.findByIdAndUpdate(
+                       {_id: body._id},
+                       {$set: {replies: body.replies}},
+                       {new: true})
+                         .then( result=> {
+                          return result;
+                     });
+                     return new Response(JSON.stringify({ message: resp}), { status: 200 })
+                   }
+               as found in the 'b' version of  /blogPostReply/server.js
+
+
+        
+          -->
+
+
+
+
+          
+
         {/each}
       {:else}
         no replies
       {/if}
     {/if}
-  {/if}
-
-
-<style>
-  p {
-    color: gray;
-  }
-
-  .blog-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-    border-radius: 15px;
-    padding: 5px;
-    margin: 10px;
-    border: 1px solid black;
-  }
-
-  .blog-profile {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-  }
-  .blog-entry {
-    flex: 5;
-    display: flex;
-    flex-direction: column;
-    min-width: 80%;
-    border: 1px solid lightgray;
-    border-radius: 15px;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-  }
-  .entry {
-    color: #303030
-  }
-  textarea {
-    height: 2rem;
-  }
-
-  .btns {
-    display: flex;
-    align-items: center;
-  }
-  .speech {
-    width: 70px;
-    background-color: transparent;
-    cursor: pointer;
-    border: none;
-    color: black;
-  }
-  .speech:disabled{
-    color: gray;
-    cursor: auto;
-  }
-  .backToList {
-    color: gray;
-    cursor: pointer;
-    text-decoration: none;
-  }
-</style>
+  
+  <p class="ml-auto text-xs text-gray-500 dark:text-gray-400">
+    Remember, contributions to this topic should follow our
+    <a href="/" class="text-primary-600 dark:text-primary-500 hover:underline">
+    Community Guidelines</a>.
+  </p>
+{/if}

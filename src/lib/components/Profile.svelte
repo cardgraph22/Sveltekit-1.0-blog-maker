@@ -8,5 +8,9 @@
   }
 </script>
 
-<h5>{username}</h5>
-<img class="object-cover h-16 w-16" src='/uploads/{getImage(username)}' alt="noImage">
+<div class="flex flex-col items-center w-20">
+  <h5>{username}</h5>
+  <div class="border border-gray-300 rounded-full w-16 h-16 overflow-hidden">
+    <img class="w-16 h-16 scale-75 object-contain" src='/uploads/{getImage(username)}' alt="noImage">
+  </div>
+</div>

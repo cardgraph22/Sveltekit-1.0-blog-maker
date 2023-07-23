@@ -1,5 +1,6 @@
 <!--
-  blogList
+  blogList - List basic info for each blog (username, user profile,
+    blog title, some control (delete)...)
 -->
 
 <script>
@@ -11,86 +12,51 @@
   import Profile from "$lib/components/Profile.svelte";
   import DeleteBlog from "$lib/components/DeleteBlog.svelte";
   
-  //  get the blogs (automatically) from the +page.server load (GET)
-
   // blogsStore controls blogs, which can be modified in other components
+  //  nb - blogs are loaded in  /src/layout.server.js
   
   $:blogs = $blogsStore;
   $:users = $usersStore;
 
   //  to add - no user logged in
-  //let username = $userStore.username;
+  let username = $userStore.username;
+
+  import { Card, MenuButton, Dropdown, DropdownItem, Avatar, Button } from "flowbite-svelte";
+
+  function getImage(username){
+    let tmp = users.filter(user=>user.username == username)
+    return (tmp.length>0 ? tmp[0].imagename : 'avatar.png')
+  }
   
   
 </script>
 
 <h3>Blogs</h3>
 <!--{$responsiveStore.type}--><!-- desktop or mobile -->
-<div class="blog-list">
+<div class="flex gap-2 flex-wrap">
   {#each blogs as blog}
-    <div class="blog-item">
-      <div class="blog-profile">
-        <Profile username={blog.username}/>
-      </div>
-      <div class="blog-entry">
-        <a href={`/blogList/${blog._id}`}>{blog.title}</a>
-        <DeleteBlog blog={blog}/>
-      </div>
+
+  <!-- tailwind (svelte-flowbite) -->
+  <Card padding='sm'>
+    <div class="flex justify-end">
+      <MenuButton />
+      <Dropdown class="w-36">
+        <DropdownItem>Edit</DropdownItem>
+        <DropdownItem>Export data</DropdownItem>
+        <DropdownItem>Delete</DropdownItem>
+      </Dropdown>
     </div>
+    <div class="flex flex-col items-center pb-4">
+      <Avatar size="lg" class="bg-transparent" rounded src='/uploads/{getImage(blog.username)}'  />
+        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{blog.username}</h5>
+        <a href={`/blogList/${blog._id}`}>{blog.title}</a>
+        <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
+        <div class="flex mt-4 space-x-3 lg:mt-6">
+          <Button>Add friend</Button>
+          <Button color="light" class="dark:text-white">Message</Button>
+        </div>
+    </div>
+  </Card>
+
   {/each}
 </div>
-
-<style>
-  h3 {
-    text-align: center;
-    color: gray;
-  }
- 
-  .blog-list {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .blog-item {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border-radius: 15px;
-    padding: 5px;
-    margin: 10px;
-    border: 1px solid gray;
-  }
-
-  .blog-profile {
-    flex: 1;
-  }
-
-  .blog-entry {
-    flex: 10;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  a {
-    text-decoration: none;
-    font-size: larger;
-    color: black;
-  }
-
-  a:hover {
-    background-color: lavenderblush;
-  }
-
-</style>
-
-
-<!--<div class="blog-item" in:fade out:fade>-->
-  <!--  nb - fade here fouls up other pages (flash effect)-->
-
-
-<!--{#if blog.username === $userStore.username}-->
-<!-- <button type='button' on:click={(()=>deleteBlog(blog, blog._id))}>X</button> -->
-<!--{/if}-->
-  <!-- 'disabled' doesnt work if class='btns' added -->
-  <!--  but,  .btn:disabled {...  works-->
-  <!--  this (delete blog) could go under 'user account management' -->

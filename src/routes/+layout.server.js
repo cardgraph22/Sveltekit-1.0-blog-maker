@@ -9,7 +9,7 @@ export async function load() {
   //console.log('blogList, +page.server.js, blogs', blogs)
   let users = await(User.find())
 
-  //  !!! use the following for production (do not retuen password)
+  //  !!! use the following for production (do not return password)
   //users = JSON.parse(JSON.stringify(users,['_id', 'username', 'imagename']));
   users = JSON.parse(JSON.stringify(users));
   return {
