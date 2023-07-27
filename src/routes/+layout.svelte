@@ -17,9 +17,7 @@
   $: {
     $userStore;
     if($userStore.username != '') msg = $userStore.username;
-    //console.log('layout, $userStore', $userStore);
-    console.log('userStore (username) changed', $userStore.username)
-    //  nb, not setting username here
+    //console.log('userStore (username) changed', $userStore.username)
   }
 
 </script>

@@ -37,7 +37,13 @@
     })
     .then(resp => resp.json())
     .then(data => {
-      $blogsStore = $blogsStore;
+      blog=data.message;
+      console.log('BlogReplies after fetch, blog')
+      console.log(blog)
+      //$blogsStore = $blogsStore;
+      return blog;
+    }).catch(error => {
+      console.log('fetch error in BlogReplies')
     })
   }
 

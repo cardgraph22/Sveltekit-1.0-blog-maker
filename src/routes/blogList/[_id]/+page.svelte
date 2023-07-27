@@ -5,7 +5,7 @@
 
   export let data;
   //export let form;
-  //console.log('/blogList/[_id], page.svelte, form',form);
+  //console.log('/blogList/[_id], page.svelte, form', form);
 
   import blogsStore  from "$stores/BlogsStore";  //  all blogs
   import usersStore  from "$stores/UsersStore";  //  all users
@@ -20,8 +20,9 @@
 
   //  to add - no user logged in
   let username = $userStore.username;
-  console.log('page, username', username)
-  let blog = data.blog[0]
+  //console.log('page, username', username)
+  //  data comes from the 'load' function
+  $:blog = data.blog[0];
 
   let entryText;
   let showMsg;
@@ -67,54 +68,11 @@
 
           <BlogReplies {blog} {reply}/>
 
-          <!-- i want to pass blog.replies[n] -->
-
-
-          <!-- svelte:self will work here because it will cause
-               the whole routine to run, including coments
-
-               but, I believe BlogReplies still uses the same actions
-               for this route (ie, reply action in page.server.js)
-               which means i dont have to use the
-                 <PostReply bind:blog={blog} replyToPost={reply} entryText={msg} />
-                 (in BlogReplies)
-                 which calls
-                 <button on:click={()=>postReply(replyToPost, entryText)}>Post</button>
-                 which calls
-                 fetch( '/blogPostReply', {
-                 which does the actual
-                 let resp = await Blog.findByIdAndUpdate(
-
-               i can use page.server to do the
-                 import { Blog } from "/src/hooks.server";
-                   export const PUT = async({request})=>{
-                     const body = await request.json()
-                     let resp = await Blog.findByIdAndUpdate(
-                       {_id: body._id},
-                       {$set: {replies: body.replies}},
-                       {new: true})
-                         .then( result=> {
-                          return result;
-                     });
-                     return new Response(JSON.stringify({ message: resp}), { status: 200 })
-                   }
-               as found in the 'b' version of  /blogPostReply/server.js
-
-
-        
-          -->
-
-
-
-
-          
-
         {/each}
       {:else}
         no replies
       {/if}
     {/if}
-  
   <p class="ml-auto text-xs text-gray-500 dark:text-gray-400">
     Remember, contributions to this topic should follow our
     <a href="/" class="text-primary-600 dark:text-primary-500 hover:underline">

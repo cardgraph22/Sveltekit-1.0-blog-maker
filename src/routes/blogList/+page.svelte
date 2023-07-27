@@ -6,11 +6,12 @@
 <script>
   import blogsStore  from "$stores/BlogsStore";  //  all blogs
   import usersStore  from "$stores/UsersStore";  //  all users
-  import responsiveStore from '$stores/ResponsiveStore';
   import userStore   from "$stores/UserStore";   //  logged in user
 
-  import Profile from "$lib/components/Profile.svelte";
-  import DeleteBlog from "$lib/components/DeleteBlog.svelte";
+  //  pre flowbite svelte
+  //import responsiveStore from '$stores/ResponsiveStore';
+  //import Profile from "$lib/components/Profile.svelte";
+  //import DeleteBlog from "$lib/components/DeleteBlog.svelte";
   
   // blogsStore controls blogs, which can be modified in other components
   //  nb - blogs are loaded in  /src/layout.server.js
@@ -26,6 +27,22 @@
   function getImage(username){
     let tmp = users.filter(user=>user.username == username)
     return (tmp.length>0 ? tmp[0].imagename : 'avatar.png')
+  }
+
+  async function deleteBlog(blog){
+    //  todo - add authoirization and confirmation
+    //console.log('deleteBlog, blogId', blog._id)
+    try {   // "it (fetch) can make relative requests on the server"
+      let res = await fetch(`/blogList?id=${blog._id}`, {   method: 'DELETE' } )
+      //console.log('deleteBlog, res', res)
+      res = await res.json();
+      //  if the blog is deleted in the db, delete it in the list
+      if(res.message === 'deleted'){
+        $blogsStore = $blogsStore.filter(item => item._id != blog._id)
+      }
+    } catch(error) {
+      console.error('deleteBlog catch error', error)
+    }
   }
   
   
@@ -43,7 +60,7 @@
       <Dropdown class="w-36">
         <DropdownItem>Edit</DropdownItem>
         <DropdownItem>Export data</DropdownItem>
-        <DropdownItem>Delete</DropdownItem>
+        <DropdownItem on:click={()=>deleteBlog(blog)}>Delete</DropdownItem>
       </Dropdown>
     </div>
     <div class="flex flex-col items-center pb-4">

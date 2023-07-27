@@ -15,7 +15,7 @@ export const actions = {
     let blog = JSON.parse(b).blog;
     let username = data.get('LIusername');
     let entryText = data.get('entryText');
-    console.log('page.server, comment', entryText)
+    //console.log('page.server, comment', entryText)
     let reply = {
       username: username,
       entry: entryText,
@@ -28,7 +28,9 @@ export const actions = {
       {$set: {replies: blog.replies}},
       {new: true})
         .then( result=> {
-         return result;
+          //console.log('result', result)
+          blog = result;
+         return blog;
     });
     return (JSON.stringify({ message: resp}), { status: 200 })
   },
@@ -55,7 +57,8 @@ export async function load({ params }){
   let id = params._id;
   let blog = await(Blog.find({_id: id}));
   blog = JSON.parse(JSON.stringify(blog));
-  //console.log('blogItem, +page.server.js, blog', blog)
+  //console.log('LOAD blogItem, +page.server.js, blog', blog)
+  //console.log('LOAD blogItem, +page.server.js')
   let users = await(User.find())
   users = JSON.parse(JSON.stringify(users));
   return {
