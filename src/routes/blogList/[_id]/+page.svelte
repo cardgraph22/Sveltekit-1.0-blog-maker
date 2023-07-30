@@ -12,7 +12,7 @@
   import userStore   from "$stores/UserStore";   //  logged in user
 
   import BlogReplies from "$lib/components/BlogReplies.svelte";
-  import DeleteBlog  from "$lib/components/DeleteBlog.svelte";
+  //import DeleteBlog  from "$lib/components/DeleteBlog.svelte";
   import Profile     from "$lib/components/Profile.svelte";
 
   $usersStore = data.users;

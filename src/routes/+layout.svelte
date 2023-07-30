@@ -7,11 +7,10 @@
   //import Navbar from '$lib/components/Navbar.svelte';
   //import Footer from '$lib/components/Footer.svelte';
 
-  import blogsStore  from "$stores/BlogsStore";  //  all blogs
   import usersStore  from "$stores/UsersStore";  //  all users
   import userStore   from "$stores/UserStore";   //  logged in user
   export let data;
-  $blogsStore = data.blogs;
+  
   $usersStore = data.users;
   let msg = 'No one logged in'
   $: {

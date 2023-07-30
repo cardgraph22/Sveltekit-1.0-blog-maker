@@ -42,13 +42,14 @@ export const actions = {
     //console.log('server, extract username, password', username, password)
 
     //  note: zod wants 'extracted' formData, Object.fromEntries,
-    //    whereas svelte formData.get wants doesn't
+    //    whereas svelte formData.get doesn't
 
     //  hunter "doesn't point out" or account for
     //  this apparent difference
 
     try {
       //  validation
+      console.log('loginForm, formDataObj', formDataObj)
       const result = loginSchema.parse(formDataObj)
       //console.log('SUCCESS')
       //console.log(result)

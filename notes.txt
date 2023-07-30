@@ -1,0 +1,13 @@
+reference to DeleteBlog still on git,
+but code is still there also
+
+Start using Tailwind in your project
+  Start using Tailwind’s utility classes to style your content,
+  making sure to set lang="postcss" for any <style> blocks that
+  need to be processed by Tailwind.
+  https://tailwindcss.com/docs/guides/sveltekit
+
+sveltekit turn off a11y warnings vite
+
+
+CTRL + K   clears visual code console

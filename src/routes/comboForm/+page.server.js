@@ -64,13 +64,14 @@ let msg = 'nothing set';
 export const actions = {
   default: async ({ request }) => {
     const formData = Object.fromEntries(await request.formData());
-    //console.log('formData', formData)
+    console.log('formData', formData)
 
     let username = formData.username;
     let password = formData.password;
-    let newUser  = formData.newUser;
+    let newUser  = JSON.parse(formData.newUser);
 
-    //console.log('server, newUser, typeof newUser', newUser, typeof newUser)
+    console.log('server, userame, password', username, password)
+    console.log('server, newUser, typeof newUser', newUser, typeof newUser)
     let file;
     if(newUser==='true'){
       let confPwd = formData.confPwd;
@@ -85,11 +86,14 @@ export const actions = {
     try {
       //  validation
       let result;
+      console.log('comboForm, newUser', newUser, typeof newUser)
       if(newUser){
+        console.log('wtf comboForm, formData', formData)
         result = newUserSchema.parse(formData);
         //console.log('server, newUser VALIDATION SUCCESS')
         console.log('!!! file 3', file)
       } else {
+        console.log('comboForm, formData', formData)
         result = loginSchema.parse(formData)
         //console.log('server, login VALIDATION SUCCESS')
       }

@@ -1,6 +1,7 @@
 <script>
   //
   //  comboForm.svelte
+  //  combines login and add new user
   //
   import { enhance } from '$app/forms'
   //export let data;
@@ -9,7 +10,8 @@
   export let form;
   $: console.log('comboForm (form), client loaded', form)
 
-  //  shouldnt this also log in adduser?
+  //  shouldnt this also log in user?
+
   $: {
     if(form?.username){
       //  this is the logged in user

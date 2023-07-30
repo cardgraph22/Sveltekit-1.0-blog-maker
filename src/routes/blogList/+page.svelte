@@ -8,6 +8,11 @@
   import usersStore  from "$stores/UsersStore";  //  all users
   import userStore   from "$stores/UserStore";   //  logged in user
 
+  export let data;
+  //console.log('DATA blogList page.svelte', data)
+  console.log('DATA blogList page.svelte')
+  $blogsStore = data.blogs;
+
   //  pre flowbite svelte
   //import responsiveStore from '$stores/ResponsiveStore';
   //import Profile from "$lib/components/Profile.svelte";
