@@ -11,10 +11,18 @@ Its demonstrates recursive nested blog replies using the element:</p>
 
 <p class="text-gray-700 text-center text-xl">It uses MongoDB with Mongoose (if you're interested).</p>
 <p class="text-gray-700 text-center text-xl">It also shows how to upload images (/userForm)</p>
+<br>
+<p class="text-blue-700 text-center text-xl mb-10">Start with 'List Blogs' from the navbar</p>
 
+<!--
+<Alert color="blue" defaultClass="text-center w-80">
+  <span class="font-medium">Info alert!</span>
+  Start with 'List Blogs' from the navbar
+</Alert>
 
 
 
 <div class="text-center w-1/2 p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
   <span class="font-medium">Info alert! </span>Start with 'List Blogs' from the navbar
 </div>
+-->
