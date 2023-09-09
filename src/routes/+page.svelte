@@ -18,24 +18,3 @@ Its demonstrates recursive nested blog replies using the element:</p>
 <div class="text-center w-1/2 p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
   <span class="font-medium">Info alert! </span>Start with 'List Blogs' from the navbar
 </div>
-
-<Badge>Default</Badge>
-<Badge color="dark">Dark</Badge>
-<Badge color="red">Red</Badge>
-<Badge color="green">Green</Badge>
-<Badge color="yellow">Yellow</Badge>
-<Badge color="indigo">Indigo</Badge>
-<Badge color="purple">Purple</Badge>
-<Badge class="mb-5" color="pink">Pink</Badge>
-<br/>
-
-
-<Button class="mt-20" >Default</Button>
-<Button color="alternative">Alternative</Button>
-<Button color="dark">Dark</Button>
-<Button color="light">Light</Button>
-<Button color="blue">Blue</Button>
-<Button color="green">Green</Button>
-<Button color="red">Red</Button>
-<Button color="yellow">Yellow</Button>
-<Button color="purple">Purple</Button>

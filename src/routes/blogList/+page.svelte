@@ -7,27 +7,24 @@
   import blogsStore  from "$stores/BlogsStore";  //  all blogs
   import usersStore  from "$stores/UsersStore";  //  all users
   import userStore   from "$stores/UserStore";   //  logged in user
+  import { Card, MenuButton, Dropdown, DropdownItem, Avatar, Button } from "flowbite-svelte";
 
   export let data;
-  //console.log('DATA blogList page.svelte', data)
-  console.log('DATA blogList page.svelte')
-  $blogsStore = data.blogs;
+    //console.log('DATA blogList page.svelte', data)
+    //console.log('DATA blogList page.svelte')
+
+  // blogsStore controls blogs, which can be modified in other components
+  $blogsStore = data.blogs;  
+  $:blogs = $blogsStore;
+  $:users = $usersStore;
 
   //  pre flowbite svelte
   //import responsiveStore from '$stores/ResponsiveStore';
   //import Profile from "$lib/components/Profile.svelte";
   //import DeleteBlog from "$lib/components/DeleteBlog.svelte";
-  
-  // blogsStore controls blogs, which can be modified in other components
-  //  nb - blogs are loaded in  /src/layout.server.js
-  
-  $:blogs = $blogsStore;
-  $:users = $usersStore;
 
   //  to add - no user logged in
   let username = $userStore.username;
-
-  import { Card, MenuButton, Dropdown, DropdownItem, Avatar, Button } from "flowbite-svelte";
 
   function getImage(username){
     let tmp = users.filter(user=>user.username == username)
@@ -49,8 +46,7 @@
       console.error('deleteBlog catch error', error)
     }
   }
-  
-  
+    
 </script>
 
 <h3>Blogs</h3>
@@ -69,7 +65,7 @@
       </Dropdown>
     </div>
     <div class="flex flex-col items-center pb-4">
-      <Avatar size="lg" class="bg-transparent" rounded src='/uploads/{getImage(blog.username)}'  />
+      <Avatar size="lg" class="bg-transparent object-contain" rounded src='/uploads/{getImage(blog.username)}'  />
         <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{blog.username}</h5>
         <a href={`/blogList/${blog._id}`}>{blog.title}</a>
         <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>

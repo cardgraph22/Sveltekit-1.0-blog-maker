@@ -54,8 +54,8 @@
 
   <form method="POST" action="?/comment" use:enhance>
     <input value={JSON.stringify({blog})} name="blog" type="hidden">
-    <input value={username} name="LIusername" type="hidden">
-    <Textarea class="mb-4" placeholder="Write a comment" name=entryText>
+    <input value={username} name="username" type="hidden">
+    <Textarea class="mb-4" placeholder="Write a comment" name="entryText">
       <div slot="footer" class="flex items-center justify-between">
         <Button type="submit">Post comment</Button>
       </div>
@@ -63,16 +63,15 @@
   </form>
 
   {#if showReplies}
-      {#if blog.replies.length > 0}
-        {#each blog.replies as reply, idx}
-
-          <BlogReplies {blog} {reply}/>
-
-        {/each}
-      {:else}
-        no replies
-      {/if}
+    {#if blog.replies.length > 0}
+      {#each blog.replies as reply, idx}
+        <BlogReplies {blog} {reply}/>
+      {/each}
+    {:else}
+      no replies
     {/if}
+  {/if}
+
   <p class="ml-auto text-xs text-gray-500 dark:text-gray-400">
     Remember, contributions to this topic should follow our
     <a href="/" class="text-primary-600 dark:text-primary-500 hover:underline">

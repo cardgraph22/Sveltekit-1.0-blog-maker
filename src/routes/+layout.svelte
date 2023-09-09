@@ -31,9 +31,11 @@
   <NavUl {hidden}>
     <NavLi on:click={toggle} href="/blogList">List Blogs</NavLi>
     <NavLi on:click={toggle} href="/blogForm">Add Blog</NavLi>
-    <NavLi on:click={toggle} href="/comboForm">Combo Form</NavLi>
+    <NavLi on:click={toggle} href="/comboForm">Login</NavLi>
+    <!--
     <NavLi on:click={toggle} href="/userForm">Add User</NavLi>
     <NavLi on:click={toggle} href="/loginForm">Login</NavLi>
+    -->
   </NavUl>
 </Navbar>
 

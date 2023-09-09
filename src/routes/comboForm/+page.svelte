@@ -3,15 +3,17 @@
   //  comboForm.svelte
   //  combines login and add new user
   //
-  import { enhance } from '$app/forms'
+  import { enhance, applyAction } from '$app/forms'
+  import { Alert, Button, Input, Label } from 'flowbite-svelte'
+  import { handleImageUpload } from '$api/handleImageUpload'
+
+  //  nothing to load to client for comboForm
   //export let data;
   //console.log('form(data), loaded', data)
 
   export let form;
-  $: console.log('comboForm (form), client loaded', form)
-
+  //$: if(form)console.log('comboForm (form), client loaded', form)
   //  shouldnt this also log in user?
-
   $: {
     if(form?.username){
       //  this is the logged in user
@@ -19,7 +21,7 @@
       $userStore._id = form._id;
       $userStore.username = form.username;
       $userStore.imagename = form.imagename;
-      console.log('comboForm, $userStore', $userStore)
+      //console.log('comboForm, $userStore', $userStore)
     }
   }
 
@@ -33,112 +35,118 @@
     imagename: '',
     imageblob: Blob
   }
-  //let confPwd = '';
 
   let newUser = false;
-  let imgName = '';
+  let imageblob, uploadedImage;
 
-  let uploadedImage = '';
-  var imageblob;
-
-  function handleImageUpload(e) {
-    const imagename = e.target.files[0]
-    if(!imagename)return;
-    uploadedImage = URL.createObjectURL(imagename);
-    console.log('upLoadedImage', uploadedImage)
-    const reader = new FileReader()
-    reader.addEventListener('load', function(){
-      console.log('load image')
-      imageblob=reader.result
-      //console.log('reader result', reader.result)
-      //console.log('imageblob', imageblob)
-    })
-    if(imagename){
-      console.log('read image')
-      reader.readAsDataURL(imagename)
-    }
-    //return imageblob
+  function getImage(e){
+    [imageblob, uploadedImage] = handleImageUpload(e);
   }
-  // The load event is fired when a file has been read successfully.
-  //  "Both read and load can be input operations, but read
-  //   focuses on the source of that input whereas load focuses
-  //   on the destination of that transfer."
+
+  //  turn login button on/off depending on input
+  let loginDisable = true;
+  $:if((user.username.length > 0 && user.password.length > 0)
+      ? loginDisable=false : loginDisable=true);
 
 </script>
 
 {#if newUser}
-  <h3>New User</h3>
+  <h3 class="flex justify-center">New User</h3>
 {:else}
-  <h3>Login</h3>
+  <h3 class="flex justify-center">Login</h3>
 {/if}
 
-<form method="POST" use:enhance enctype="multipart/form-data">
+<div class="formborder">
+<form method="POST" enctype="multipart/form-data"
+  use:enhance={({ formElement }) => {
+    return async({ result, update }) => {
+      if(result.type === 'success'){
+        formElement.reset();
+      }
+      if(result.type === 'invalid'){
+        await applyAction(result);
+      }
+      update();
+    }
+  }}
+>
   <div class="form-field">
     <input type="hidden" name="newUser" value={newUser} />
-    <label for="userName">User Name</label>
-    <input type="text" id="username" name="username" bind:value={user.username}>
+
+    <!--  username  -->
+    <div class='mb-6'>
+      <Label for='username' class='block mb-2'>User Name</Label>
+      <Input id='username' placeholder="Enter User Name" name="username" bind:value={user.username} />
+    </div>
     {#if form?.errors?.username}
+      <Alert>
+        <span class="font-medium">Default alert!</span>{form?.errors?.username[0]}
+      </Alert>
       <h6>{form?.errors?.username[0]}</h6>
     {/if}
-    <label for="entry">Password</label>
-    <input type="text" id="password" name="password" bind:value={user.password}>
+
+    <!--  password  -->
+    <div class='mb-6'>
+      <Label for='password' class='block mb-2'>Password</Label>
+      <Input id='password' placeholder="Enter password" name="password" bind:value={user.password} />
+    </div>
     {#if form?.errors?.password}
+      <Alert>
+        <span class="font-medium">Alert! </span>{form?.errors?.password[0]}
+      </Alert>
       <h6>{form?.errors?.password[0]}</h6>
     {/if}
+
+    <!--  confirm password (if new user)  -->
     {#if newUser}
       <label for="entry">Confirm Password</label>
       <input type="text" id="confPwd" name="confPwd" bind:value={user.confPwd}>
-      {#if form?.errors?.confPwd}
-        <h6>{form?.errors?.confPwd[0]}</h6>
-      {/if}
+      {#if form?.errors?.confPwd}<h6>{form?.errors?.confPwd[0]}</h6>{/if}
       <label for="imagename">Image</label>
-      <input name='imagename' on:change={handleImageUpload} type="file" bind:value={user.imagename} />
-      {#if form?.errors?.imagename}
-        <h6>{form?.errors?.imagename[0]}</h6>
-      {/if}
+      <input name='imagename' on:change={getImage} type="file" bind:value={user.imagename} />
+      {#if form?.errors?.imagename}<h6>{form?.errors?.imagename[0]}</h6>{/if}
     {/if}
   </div>
-
-  <!--
-
-    Left off here
-      formaction attribute - wants to use the same data (i think)
-        with (completely?) different action
-      I want to use 'augmented' (more) data and 'augmented' (more)
-        functionality
-
-  -->
-
-  <!--
-  {#if newUser}
-    <ImgUpload bind:imgName/>
-  {/if}
-  -->
 
   {#if uploadedImage}
     <img src={uploadedImage} alt="noimage(yet)">
   {/if}
 
   {#if newUser}
-    <button>Add User</button>
+    <!--<button>Add User</button>-->
+    <Button type="submit" color="blue">Add User</Button>
   {:else}
-    <button>Login</button>
+    <Button disabled={loginDisable} type="submit" color="blue">Login</Button>
   {/if}
 
+  <!--
   <p>JSON.stringify(form) is </p>
   <p>{JSON.stringify(form)}</p>
+  -->
 
   
   {#if form?.success}
-    {JSON.stringify(form)}
-    <p>successfully added user</p>
+    <Alert color="green">
+      {form?.msg}
+    </Alert>
+  {:else}
+    <Alert color="red">
+      {form?.msg}
+    </Alert>
   {/if}
-
+  <Button type="button" color="alternative" id='newUser' on:click={() => newUser = !newUser}>New User?</Button>
 </form>
+</div>
 <!--  nb - if this button is inside the form tags, then clicking
            it 'submits' the form  -->
-<button id='newUser' on:click={() => newUser = !newUser}>New User?</button>
+<!--<button id='newUser' on:click={() => newUser = !newUser}>New User?</button>-->
+
 <style>
+  /*
+  .formborder {
+    border: 1px solid blue;
+  }
+  */
 
   form {
     width: 400px;
@@ -155,6 +163,7 @@
 
   .form-field {
     margin:  18px auto;
+    /*border: 1px solid red;*/
   }
 
   input {

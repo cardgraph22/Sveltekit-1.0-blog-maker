@@ -10,10 +10,14 @@ import { User } from "/src/hooks.server";
 export const actions = {
   comment: async ({request}) => {
     const data = await request.formData();
+    //  input
+    //    blog      (hidden input)
+    //    username  (hidden input)
+    //    entryText (the 'comment' text)
     //console.log('data', data)
-    let b = data.get('blog');
-    let blog = JSON.parse(b).blog;
-    let username = data.get('LIusername');
+    let btmp = data.get('blog');          // form 'name'   name: 'blog',
+    let blog = JSON.parse(btmp).blog;     // form 'value'  value: `{"blog":{"_id":
+    let username = data.get('username');
     let entryText = data.get('entryText');
     //console.log('page.server, comment', entryText)
     let reply = {
@@ -34,11 +38,13 @@ export const actions = {
     });
     return (JSON.stringify({ message: resp}), { status: 200 })
   },
+  
+  //  this is not called, i'm doing manual PUT in BlogReples
   reply: async({request}) => {
     const data = await request.formData();
     //console.log('page.server, reply', data)
-    let b = data.get('blog');
-    let blog = JSON.parse(b).blog;  //blog is inside b
+    let btmp = data.get('blog');
+    let blog = JSON.parse(btmp).blog;  //blog is inside btmp
     //console.log('server side blog', blog)
 
     let resp = await Blog.findByIdAndUpdate(

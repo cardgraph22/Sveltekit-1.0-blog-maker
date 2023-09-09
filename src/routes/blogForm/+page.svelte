@@ -7,6 +7,7 @@
   //
 
   import { enhance } from '$app/forms'
+  import { Button, Input, Label, Textarea } from 'flowbite-svelte'
   //export let data;
   //console.log('form(data), loaded', data)
   import userStore from "$stores/UserStore";
@@ -30,10 +31,20 @@
   <div class="form-field">
     {blog.username}
     <input type="hidden" name="username" value={blog.username}>
-    <label for="title">Title</label>
-    <input type="text" id="title" name="title" bind:value={blog.title}>
+    <div class='mb-6'>
+      <Label for='title' class='block mb-2'>User Name</Label>
+      <Input id='title' placeholder="Enter Title" name="title" bind:value={blog.title} />
+    </div>
+
+    <div class='mb-6'>
+      <Label for='entry' class='block mb-2'>Blog Entry</Label>
+      <Textarea id="entry" placeholder="Entry" rows="4" name="entry"/>
+    </div>
+
+    <!--
     <label for="entry">Blog Entry</label>
     <textarea name="entry" id="entry" cols="30" rows="10" bind:value={blog.entry}></textarea>
+    -->
     <button class='btn'>AddBlog</button>
   </div>
 

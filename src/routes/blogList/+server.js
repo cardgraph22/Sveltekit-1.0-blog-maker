@@ -3,7 +3,7 @@ import { Blog } from "/src/hooks.server";
 //import mongoose from 'mongoose'
 import { Schema } from "mongoose"
 const blogSchema = new Schema({}, { strict: false });
-console.log('blogList, +server.js, (blog functions)')
+//console.log('blogList, +server.js, (blog functions)')
 
 export async function DELETE( { url } ){
   const id = url.searchParams.get('id')
@@ -15,6 +15,8 @@ export async function DELETE( { url } ){
   return response
 
 }
+
+//  todo - these are not used
 export async function PUT(){
   populateBlogs();
   return new Response(JSON.stringify({ message: "Some Message" }), { status: 200 })

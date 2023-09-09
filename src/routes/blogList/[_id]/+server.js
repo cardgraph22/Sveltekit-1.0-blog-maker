@@ -7,7 +7,6 @@ import { Blog } from "/src/hooks.server";
 import { User } from "/src/hooks.server";
 
 export const PUT = async({request})=>{
-  console.log('PUT')
   const body = await request.json()
   let resp = await Blog.findByIdAndUpdate(
     {_id: body._id},
