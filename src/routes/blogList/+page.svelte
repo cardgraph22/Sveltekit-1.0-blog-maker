@@ -8,6 +8,8 @@
   import usersStore  from "$stores/UsersStore";  //  all users
   import userStore   from "$stores/UserStore";   //  logged in user
   import { Card, MenuButton, Dropdown, DropdownItem, Avatar, Button } from "flowbite-svelte";
+  import { Rating, Thumbup } from 'flowbite-svelte';
+
 
   export let data;
     //console.log('DATA blogList page.svelte', data)
@@ -49,6 +51,12 @@
     
 </script>
 
+<style>
+  #blogTitle {
+    color: magenta;
+  }
+</style>
+
 <h3>Blogs</h3>
 <!--{$responsiveStore.type}--><!-- desktop or mobile -->
 <div class="flex gap-2 flex-wrap">
@@ -67,10 +75,11 @@
     <div class="flex flex-col items-center pb-4">
       <Avatar size="lg" class="bg-transparent object-contain" rounded src='/uploads/{getImage(blog.username)}'  />
         <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{blog.username}</h5>
-        <a href={`/blogList/${blog._id}`}>{blog.title}</a>
+        <a id="blogTitle" href={`/blogList/${blog._id}`}>{blog.title}</a>
         <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
         <div class="flex mt-4 space-x-3 lg:mt-6">
-          <Button>Add friend</Button>
+          <Button on:click={()=>{blog.likes++}}>Like {blog.likes}</Button>
+          <!--<Rating on:click={()=>{blog.likes++}} icon={Thumbup}/>-->
           <Button color="light" class="dark:text-white">Message</Button>
         </div>
     </div>

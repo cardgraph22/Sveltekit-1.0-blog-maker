@@ -17,6 +17,7 @@
     username: username,
     title: '',
     entry: '',
+    likes: 0,
     replies: []
   }
   let showErrors = false;
