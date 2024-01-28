@@ -53,7 +53,7 @@
 
 <style>
   #blogTitle {
-    color: magenta;
+    color: darkblue;
   }
 </style>
 
